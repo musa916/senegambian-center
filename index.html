@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>مركز الشاعر السنغامبي للغة والشعر</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    background: #f5f7fb;
+    color: #17213b;
+}
+
+header {
+    background: linear-gradient(135deg, #17213b, #304a7a);
+    color: white;
+    padding: 45px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin-top: 12px;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 16px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.07);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.tracks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.track {
+    border: 1px solid #e1e6ef;
+    border-radius: 14px;
+    padding: 18px;
+    background: #fafbfd;
+}
+
+.track h3 {
+    margin-top: 0;
+    font-size: 17px;
+}
+
+.levels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.level {
+    background: #eef2f8;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.button {
+    display: inline-block;
+    padding: 13px 20px;
+    background: #17213b;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #667085;
+    font-size: 13px;
+}
+
+@media (max-width: 700px) {
+    header h1 {
+        font-size: 21px;
+    }
+
+    .tracks,
+    .levels {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>مركز الشاعر السنغامبي للغة والشعر</h1>
+    <p>المنصة الرقمية للمركز</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>مرحبًا بكم</h2>
+
+        <p>
+            هذه هي الصفحة الإلكترونية لمركز الشاعر السنغامبي للغة والشعر.
+        </p>
+
+        <p>
+            يعمل المركز على تنمية اللغة العربية والشعر والكتابة
+            والمهارات التطبيقية لدى الطلاب.
+        </p>
+
+        <a
+            class="button"
+            href="https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-admin-page"
+        >
+            دخول لوحة الإدارة
+        </a>
+    </div>
+
+    <div class="card">
+        <h2>مسارات المركز</h2>
+
+        <div class="tracks">
+
+            <div class="track">
+                <h3>المسار الأول</h3>
+                <p>
+                    النحو والصرف والبلاغة
+                </p>
+            </div>
+
+            <div class="track">
+                <h3>المسار الثاني</h3>
+                <p>
+                    الخط والإملاء ومهارة التحدث والإلقاء
+                </p>
+            </div>
+
+            <div class="track">
+                <h3>المسار الثالث</h3>
+                <p>
+                    العروض والشعر والنقد والكتابة الإبداعية
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>مستويات البرنامج</h2>
+
+        <div class="levels">
+
+            <div class="level">
+                التأسيس
+            </div>
+
+            <div class="level">
+                التطوير
+            </div>
+
+            <div class="level">
+                التمكّن
+            </div>
+
+            <div class="level">
+                الإبداع
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>الملف الرقمي للطالب</h2>
+
+        <p>
+            لكل طالب ملف رقمي خاص يمكن من خلاله متابعة بياناته
+            ونتائجه وحضوره وتقدمه وإنجازاته.
+        </p>
+
+        <p>
+            روابط الطلاب الخاصة تكون للعرض فقط، ولا تسمح للطالب
+            بتعديل بياناته.
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    © مركز الشاعر السنغامبي للغة والشعر
+</footer>
+
+</body>
+  </html>
