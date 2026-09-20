@@ -3,13 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>مركز الشاعر السنغامبي للغة والشعر</title>
 
+  <meta
+    name="description"
+    content="مركز الشاعر السنغامبي للغة والشعر - برنامج تعليمي للغة العربية والشعر والكتابة والإلقاء."
+  >
+
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -19,10 +30,18 @@
       line-height: 1.8;
     }
 
+    a {
+      text-decoration: none;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       background: #123b2a;
       color: white;
-      padding: 18px 7%;
+      padding: 16px 7%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -31,7 +50,7 @@
     }
 
     .logo {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: bold;
     }
 
@@ -39,32 +58,55 @@
       display: flex;
       gap: 18px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     nav a {
       color: white;
-      text-decoration: none;
       font-size: 14px;
+      transition: 0.2s;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      opacity: 0.75;
     }
 
+    .nav-admin {
+      border: 1px solid rgba(255,255,255,0.7);
+      padding: 6px 13px;
+      border-radius: 7px;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
     .hero {
-      background: linear-gradient(135deg, #123b2a, #1e6848);
+      background:
+        linear-gradient(135deg, #123b2a, #1e6848);
+
       color: white;
       text-align: center;
-      padding: 85px 20px;
+      padding: 90px 20px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 15px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 30px;
+      margin-bottom: 20px;
+      font-size: 13px;
     }
 
     .hero h1 {
-      font-size: 38px;
+      font-size: 40px;
       margin-bottom: 18px;
     }
 
     .hero p {
-      max-width: 750px;
+      max-width: 780px;
       margin: auto;
       font-size: 18px;
       opacity: 0.95;
@@ -74,6 +116,7 @@
       margin-top: 30px;
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 12px;
       flex-wrap: wrap;
     }
@@ -82,8 +125,13 @@
       display: inline-block;
       padding: 12px 24px;
       border-radius: 8px;
-      text-decoration: none;
       font-weight: bold;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
     }
 
     .btn-primary {
@@ -96,13 +144,23 @@
       color: white;
     }
 
+    .btn-green {
+      background: #123b2a;
+      color: white;
+    }
+
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
     section {
-      padding: 65px 7%;
+      padding: 70px 7%;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 42px;
     }
 
     .section-title h2 {
@@ -115,6 +173,11 @@
       color: #68736e;
     }
 
+
+    /* =========================
+       TRACKS
+    ========================= */
+
     .cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -123,15 +186,15 @@
 
     .card {
       background: white;
-      padding: 28px;
+      padding: 30px;
       border-radius: 14px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.06);
       border: 1px solid #e3e9e5;
     }
 
     .card-number {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: #e8f1ec;
       color: #123b2a;
@@ -144,9 +207,19 @@
 
     .card h3 {
       color: #123b2a;
-      margin-bottom: 10px;
-      font-size: 20px;
+      margin-bottom: 12px;
+      font-size: 19px;
     }
+
+    .card p {
+      color: #59645f;
+      font-size: 15px;
+    }
+
+
+    /* =========================
+       LEVELS
+    ========================= */
 
     .levels {
       display: grid;
@@ -157,55 +230,135 @@
     .level {
       background: white;
       border-radius: 14px;
-      padding: 25px 18px;
+      padding: 28px 18px;
       text-align: center;
       border: 1px solid #e3e9e5;
+    }
+
+    .level-number {
+      font-size: 13px;
+      color: #68736e;
+      margin-bottom: 5px;
     }
 
     .level strong {
       display: block;
       color: #123b2a;
       font-size: 22px;
-      margin-bottom: 5px;
     }
 
-    .student-file {
+
+    /* =========================
+       STUDENT PORTAL
+    ========================= */
+
+    .student-portal {
       background: #eaf2ee;
     }
 
-    .file-box {
-      max-width: 900px;
+    .portal-box {
+      max-width: 950px;
       margin: auto;
       background: white;
-      padding: 40px;
+      padding: 45px;
       border-radius: 18px;
-      text-align: center;
       box-shadow: 0 5px 25px rgba(0,0,0,0.06);
     }
 
-    .file-box h2 {
+    .portal-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .portal-icon {
+      width: 65px;
+      height: 65px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background: #e8f1ec;
       color: #123b2a;
-      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
     }
 
-    .file-box p {
+    .portal-header h2 {
+      color: #123b2a;
+      margin-bottom: 10px;
+    }
+
+    .portal-header p {
       color: #59645f;
-      margin-bottom: 25px;
     }
 
-    .features {
+    .portal-info {
+      background: #f5f7f6;
+      border-right: 4px solid #123b2a;
+      padding: 18px;
+      margin: 25px 0;
+      border-radius: 8px;
+    }
+
+    .portal-info strong {
+      color: #123b2a;
+    }
+
+    .portal-features {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
+      gap: 13px;
       margin-top: 25px;
-      text-align: right;
     }
 
-    .feature {
-      background: #f5f7f6;
-      padding: 15px;
+    .portal-feature {
+      background: #f8faf9;
+      border: 1px solid #e3e9e5;
+      padding: 14px;
       border-radius: 9px;
+      color: #34413b;
     }
+
+    .student-link-note {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 13px;
+      color: #7a8580;
+    }
+
+
+    /* =========================
+       ADMIN PORTAL
+    ========================= */
+
+    .admin-section {
+      background: white;
+    }
+
+    .admin-box {
+      max-width: 900px;
+      margin: auto;
+      border: 1px solid #dfe7e2;
+      border-radius: 16px;
+      padding: 35px;
+      text-align: center;
+    }
+
+    .admin-box h2 {
+      color: #123b2a;
+      margin-bottom: 10px;
+    }
+
+    .admin-box p {
+      color: #59645f;
+      max-width: 700px;
+      margin: auto;
+    }
+
+
+    /* =========================
+       FEATURES
+    ========================= */
 
     .about {
       display: grid;
@@ -215,7 +368,7 @@
 
     .about-box {
       background: white;
-      padding: 25px;
+      padding: 27px;
       border-radius: 14px;
       border: 1px solid #e3e9e5;
     }
@@ -225,19 +378,41 @@
       margin-bottom: 10px;
     }
 
+    .about-box p {
+      color: #59645f;
+      font-size: 15px;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer {
       background: #123b2a;
       color: white;
       text-align: center;
-      padding: 30px 20px;
+      padding: 35px 20px;
+    }
+
+    footer .footer-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 7px;
     }
 
     footer p {
       opacity: 0.9;
-      font-size: 14px;
+      font-size: 13px;
     }
 
+
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 850px) {
+
       .cards,
       .about {
         grid-template-columns: 1fr;
@@ -248,11 +423,13 @@
       }
 
       .hero h1 {
-        font-size: 30px;
+        font-size: 31px;
       }
     }
 
-    @media (max-width: 550px) {
+
+    @media (max-width: 600px) {
+
       header {
         justify-content: center;
         text-align: center;
@@ -260,14 +437,19 @@
 
       nav {
         justify-content: center;
+        gap: 10px 14px;
+      }
+
+      nav a {
+        font-size: 13px;
       }
 
       .hero {
-        padding: 60px 18px;
+        padding: 65px 18px;
       }
 
       .hero h1 {
-        font-size: 26px;
+        font-size: 27px;
       }
 
       .hero p {
@@ -275,235 +457,544 @@
       }
 
       section {
-        padding: 50px 18px;
+        padding: 55px 18px;
       }
 
-      .levels,
-      .features {
+      .levels {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .portal-box,
+      .admin-box {
+        padding: 25px 18px;
+      }
+
+      .portal-features {
         grid-template-columns: 1fr;
       }
 
-      .file-box {
-        padding: 25px 18px;
+      .section-title h2 {
+        font-size: 26px;
       }
     }
+
   </style>
 </head>
 
+
 <body>
 
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
   <header>
-    <div class="logo">مركز الشاعر السنغامبي للغة والشعر</div>
+
+    <div class="logo">
+      مركز الشاعر السنغامبي للغة والشعر
+    </div>
 
     <nav>
-      <a href="#home">الرئيسية</a>
-      <a href="#tracks">المسارات</a>
-      <a href="#levels">المستويات</a>
-      <a href="#student-file">ملف الطالب</a>
-      <a href="#about">عن المركز</a>
+
+      <a href="#home">
+        الرئيسية
+      </a>
+
+      <a href="#tracks">
+        المسارات
+      </a>
+
+      <a href="#levels">
+        المستويات
+      </a>
+
+      <a href="#student-portal">
+        بوابة الطالب
+      </a>
+
+      <a href="#admin">
+        الإدارة
+      </a>
+
+      <a
+        class="nav-admin"
+        href="https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-admin-page"
+        target="_blank">
+        دخول الإدارة
+      </a>
+
     </nav>
+
   </header>
+
 
 
   <main>
 
-    <!-- الرئيسية -->
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
     <section class="hero" id="home">
-      <h1>مركز الشاعر السنغامبي للغة والشعر</h1>
+
+      <div class="hero-badge">
+        برنامج تعليمي للغة العربية والشعر
+      </div>
+
+      <h1>
+        مركز الشاعر السنغامبي للغة والشعر
+      </h1>
 
       <p>
-        برنامج تعليمي يهدف إلى بناء طالب متمكن من اللغة العربية،
-        وقادر على تطبيق ما يتعلمه في النحو والصرف والبلاغة والخط والإملاء
-        والتحدث والإلقاء والعروض والشعر والنقد والكتابة الإبداعية.
+        بيئة تعليمية متدرجة تهدف إلى تنمية الملكة اللغوية والأدبية،
+        وربط المعرفة بالتطبيق والممارسة والإبداع.
       </p>
 
       <div class="buttons">
+
         <a
           class="btn btn-primary"
-          href="https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-admin-page"
-          target="_blank">
-          دخول الإدارة
+          href="#student-portal">
+          بوابة الطالب
         </a>
 
-        <a class="btn btn-secondary" href="#tracks">
+        <a
+          class="btn btn-secondary"
+          href="#tracks">
           تعرف على البرنامج
         </a>
+
       </div>
+
     </section>
 
 
-    <!-- المسارات -->
+
+    <!-- =========================
+         TRACKS
+    ========================= -->
+
     <section id="tracks">
 
       <div class="section-title">
-        <h2>المسارات التعليمية</h2>
-        <p>يمكن للطالب اختيار مسار واحد أو مسارين في الوقت نفسه.</p>
+
+        <h2>
+          المسارات التعليمية
+        </h2>
+
+        <p>
+          يمكن للطالب اختيار مسار واحد أو مسارين في الوقت نفسه.
+        </p>
+
       </div>
+
 
       <div class="cards">
 
-        <div class="card">
-          <div class="card-number">1</div>
-          <h3>النحو والصرف والبلاغة</h3>
-          <p>
-            دراسة قواعد اللغة العربية وتطبيقاتها، مع التدرج في الصرف
-            والبلاغة بفروعها ومستوياتها.
-          </p>
-        </div>
 
         <div class="card">
-          <div class="card-number">2</div>
-          <h3>الخط والإملاء ومهارة التحدث والإلقاء</h3>
+
+          <div class="card-number">
+            1
+          </div>
+
+          <h3>
+            النحو والصرف والبلاغة
+          </h3>
+
           <p>
-            تنمية الكتابة الصحيحة والخط، وتحسين القدرة على التحدث
-            والتعبير والإلقاء أمام الآخرين.
+            دراسة النحو والصرف والبلاغة بصورة متدرجة،
+            مع التركيز على الفهم والتطبيق واستخدام اللغة بصورة صحيحة.
           </p>
+
         </div>
 
+
+
         <div class="card">
-          <div class="card-number">3</div>
-          <h3>العروض والشعر والنقد والكتابة الإبداعية</h3>
+
+          <div class="card-number">
+            2
+          </div>
+
+          <h3>
+            الخط والإملاء ومهارة التحدث والإلقاء
+          </h3>
+
           <p>
-            التعرف على علم العروض والشعر والقافية والنقد،
-            وتنمية مهارات الكتابة والإبداع الأدبي.
+            تنمية مهارات الكتابة والخط والإملاء،
+            وتحسين القدرة على التحدث والتعبير والإلقاء أمام الجمهور.
           </p>
+
         </div>
+
+
+
+        <div class="card">
+
+          <div class="card-number">
+            3
+          </div>
+
+          <h3>
+            العروض والشعر والنقد والكتابة الإبداعية
+          </h3>
+
+          <p>
+            دراسة العروض والشعر والقافية والنقد،
+            مع تدريب الطالب على الكتابة الإبداعية والتعبير الأدبي.
+          </p>
+
+        </div>
+
 
       </div>
+
     </section>
 
 
-    <!-- المستويات -->
+
+    <!-- =========================
+         LEVELS
+    ========================= -->
+
     <section id="levels">
 
       <div class="section-title">
-        <h2>المستويات التعليمية</h2>
-        <p>أربع مراحل متدرجة من التأسيس إلى الإبداع.</p>
+
+        <h2>
+          المستويات التعليمية
+        </h2>
+
+        <p>
+          أربعة مستويات متدرجة من التأسيس إلى الإبداع.
+        </p>
+
       </div>
+
 
       <div class="levels">
 
-        <div class="level">
-          <strong>المستوى الأول</strong>
-          التأسيس
-        </div>
 
         <div class="level">
-          <strong>المستوى الثاني</strong>
-          التطوير
+
+          <div class="level-number">
+            المستوى الأول
+          </div>
+
+          <strong>
+            التأسيس
+          </strong>
+
         </div>
 
-        <div class="level">
-          <strong>المستوى الثالث</strong>
-          التمكّن
-        </div>
 
         <div class="level">
-          <strong>المستوى الرابع</strong>
-          الإبداع
+
+          <div class="level-number">
+            المستوى الثاني
+          </div>
+
+          <strong>
+            التطوير
+          </strong>
+
         </div>
+
+
+        <div class="level">
+
+          <div class="level-number">
+            المستوى الثالث
+          </div>
+
+          <strong>
+            التمكّن
+          </strong>
+
+        </div>
+
+
+        <div class="level">
+
+          <div class="level-number">
+            المستوى الرابع
+          </div>
+
+          <strong>
+            الإبداع
+          </strong>
+
+        </div>
+
 
       </div>
+
     </section>
 
 
-    <!-- ملف الطالب -->
-    <section class="student-file" id="student-file">
 
-      <div class="file-box">
+    <!-- =========================
+         STUDENT PORTAL
+    ========================= -->
 
-        <h2>ملف الطالب الرقمي</h2>
+    <section
+      class="student-portal"
+      id="student-portal">
 
-        <p>
-          لكل طالب ملف رقمي خاص يمكن للإدارة من خلاله متابعة بياناته
-          ونتائجه وحضوره وتقدمه وإنجازاته خلال مسيرته في المركز.
-        </p>
 
-        <div class="features">
+      <div class="portal-box">
 
-          <div class="feature">
-            👤 البيانات الشخصية والبيانات التعليمية
+
+        <div class="portal-header">
+
+          <div class="portal-icon">
+            👤
           </div>
 
-          <div class="feature">
-            📚 المسارات والمستويات الدراسية
+          <h2>
+            بوابة الطالب
+          </h2>
+
+          <p>
+            ملفك التعليمي الرقمي في مركز الشاعر السنغامبي للغة والشعر.
+          </p>
+
+        </div>
+
+
+
+        <div class="portal-info">
+
+          <strong>
+            كيف يدخل الطالب إلى ملفه؟
+          </strong>
+
+          <br>
+
+          بعد إعداد ملف الطالب من قبل الإدارة،
+          يتم إنشاء <strong>رابط خاص</strong> للطالب وإرساله إليه.
+          يستخدم الطالب هذا الرابط للاطلاع على ملفه التعليمي.
+
+          <br><br>
+
+          <strong>
+            ملاحظة:
+          </strong>
+
+          ملف الطالب للعرض فقط،
+          ولا يستطيع الطالب تعديل البيانات المسجلة فيه.
+
+        </div>
+
+
+
+        <div class="portal-features">
+
+
+          <div class="portal-feature">
+            👤 البيانات الشخصية والتعليمية
           </div>
 
-          <div class="feature">
+
+          <div class="portal-feature">
+            📚 المسارات والمستويات
+          </div>
+
+
+          <div class="portal-feature">
             📝 النتائج والتقييمات
           </div>
 
-          <div class="feature">
-            📅 سجل الحضور والغياب
+
+          <div class="portal-feature">
+            📅 سجل الحضور
           </div>
 
-          <div class="feature">
-            🏆 الإنجازات والشهادات
+
+          <div class="portal-feature">
+            🏆 الإنجازات
           </div>
 
-          <div class="feature">
-            📈 متابعة التقدم الدراسي
+
+          <div class="portal-feature">
+            📈 مستوى التقدم
           </div>
+
 
         </div>
+
+
 
         <div class="buttons">
+
           <a
-            class="btn btn-primary"
+            class="btn btn-green"
             href="https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-admin-page"
             target="_blank">
-            دخول لوحة الإدارة
+
+            أنا طالب ولدي رابط خاص
+
           </a>
+
         </div>
 
+
+        <div class="student-link-note">
+
+          إذا لم يصلك رابط ملفك الخاص،
+          تواصل مع إدارة المركز.
+
+        </div>
+
+
       </div>
+
     </section>
 
 
-    <!-- عن المركز -->
+
+    <!-- =========================
+         ADMIN
+    ========================= -->
+
+    <section
+      class="admin-section"
+      id="admin">
+
+
+      <div class="admin-box">
+
+        <h2>
+          بوابة إدارة المركز
+        </h2>
+
+        <p>
+
+          من خلال لوحة الإدارة يمكن للإدارة متابعة الطلاب،
+          وإدارة ملفاتهم ونتائجهم وحضورهم وإنجازاتهم وتقدمهم،
+          وإنشاء الروابط الخاصة بملفات الطلاب.
+
+        </p>
+
+
+        <div class="buttons">
+
+          <a
+            class="btn btn-green"
+            href="https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-admin-page"
+            target="_blank">
+
+            دخول لوحة الإدارة
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         ABOUT
+    ========================= -->
+
     <section id="about">
 
+
       <div class="section-title">
-        <h2>عن البرنامج</h2>
-        <p>منهج تدريجي يجمع بين المعرفة والتطبيق.</p>
+
+        <h2>
+          عن البرنامج
+        </h2>
+
+        <p>
+          منهج تدريجي يجمع بين المعرفة والتطبيق والمتابعة.
+        </p>
+
       </div>
+
 
       <div class="about">
 
-        <div class="about-box">
-          <h3>التدرج</h3>
-          <p>
-            ينتقل الطالب بين أربعة مستويات وفق تقدمه ونتائجه،
-            من التأسيس إلى الإبداع.
-          </p>
-        </div>
 
         <div class="about-box">
-          <h3>التطبيق</h3>
+
+          <h3>
+            التدرج
+          </h3>
+
           <p>
-            لا يقتصر البرنامج على الحفظ، بل يهتم بالممارسة والتطبيق
-            والواجبات والمشروعات والأنشطة.
+            ينتقل الطالب بين أربعة مستويات وفق تقدمه
+            ونتائجه في المسار الذي يدرسه.
           </p>
+
         </div>
 
+
+
         <div class="about-box">
-          <h3>المتابعة</h3>
+
+          <h3>
+            التطبيق
+          </h3>
+
           <p>
-            تعتمد الإدارة على ملف رقمي لمتابعة مسيرة الطالب
-            وحضوره ونتائجه وإنجازاته.
+            يهتم البرنامج بالممارسة والتطبيق والواجبات
+            والمشروعات والأنشطة، وليس الحفظ وحده.
           </p>
+
         </div>
+
+
+
+        <div class="about-box">
+
+          <h3>
+            المتابعة
+          </h3>
+
+          <p>
+            يتم حفظ بيانات الطالب التعليمية في ملف رقمي
+            يساعد الإدارة على متابعة مسيرته في المركز.
+          </p>
+
+        </div>
+
 
       </div>
+
     </section>
+
 
   </main>
 
 
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
   <footer>
-    <p>مركز الشاعر السنغامبي للغة والشعر</p>
-    <p>© 2026 جميع الحقوق محفوظة</p>
+
+    <div class="footer-title">
+      مركز الشاعر السنغامبي للغة والشعر
+    </div>
+
+    <p>
+      تعليم اللغة العربية والشعر والكتابة والإلقاء
+    </p>
+
+    <p>
+      © 2026 جميع الحقوق محفوظة
+    </p>
+
   </footer>
 
+
 </body>
-</html>
+  </html>
