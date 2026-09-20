@@ -41,7 +41,7 @@
     header {
       background: #123b2a;
       color: white;
-      padding: 16px 7%;
+      padding: 12px 7%;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -49,8 +49,22 @@
       flex-wrap: wrap;
     }
 
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: white;
+    }
+
     .logo {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
     }
 
@@ -88,7 +102,18 @@
 
       color: white;
       text-align: center;
-      padding: 90px 20px;
+      padding: 75px 20px 90px;
+    }
+
+    .hero-logo {
+      width: 145px;
+      height: 145px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 8px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.20);
     }
 
     .hero-badge {
@@ -128,6 +153,8 @@
       font-weight: bold;
       transition: 0.2s;
       cursor: pointer;
+      border: none;
+      font-family: inherit;
     }
 
     .btn:hover {
@@ -142,6 +169,7 @@
     .btn-secondary {
       border: 1px solid white;
       color: white;
+      background: transparent;
     }
 
     .btn-green {
@@ -249,6 +277,71 @@
 
 
     /* =========================
+       FOUNDER
+    ========================= */
+
+    .founder-section {
+      background: white;
+    }
+
+    .founder-box {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 45px;
+      align-items: center;
+      background: #f8faf9;
+      border: 1px solid #e1e9e4;
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    }
+
+    .founder-image {
+      text-align: center;
+    }
+
+    .founder-image img {
+      width: 280px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 18px;
+      display: block;
+      margin: auto;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .founder-content h2 {
+      color: #123b2a;
+      font-size: 29px;
+      margin-bottom: 8px;
+    }
+
+    .founder-title {
+      color: #b28732;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .founder-content p {
+      color: #59645f;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .founder-highlight {
+      background: white;
+      border-right: 4px solid #b28732;
+      padding: 15px 18px;
+      border-radius: 8px;
+      color: #34413b;
+      margin-top: 20px;
+    }
+
+
+    /* =========================
        STUDENT PORTAL
     ========================= */
 
@@ -317,6 +410,37 @@
       padding: 14px;
       border-radius: 9px;
       color: #34413b;
+    }
+
+    .student-form {
+      max-width: 700px;
+      margin: 30px auto 0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .student-form input {
+      flex: 1;
+      padding: 13px 15px;
+      border: 1px solid #ccd8d1;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      direction: ltr;
+      text-align: left;
+      outline: none;
+    }
+
+    .student-form input:focus {
+      border-color: #123b2a;
+    }
+
+    .student-message {
+      text-align: center;
+      margin-top: 12px;
+      color: #68736e;
+      font-size: 13px;
+      min-height: 25px;
     }
 
     .student-link-note {
@@ -395,6 +519,16 @@
       padding: 35px 20px;
     }
 
+    footer .footer-logo {
+      width: 75px;
+      height: 75px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 5px;
+      margin-bottom: 12px;
+    }
+
     footer .footer-title {
       font-size: 18px;
       font-weight: bold;
@@ -422,6 +556,19 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+      .founder-box {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .founder-content {
+        text-align: center;
+      }
+
+      .founder-highlight {
+        text-align: right;
+      }
+
       .hero h1 {
         font-size: 31px;
       }
@@ -435,6 +582,11 @@
         text-align: center;
       }
 
+      .brand {
+        justify-content: center;
+        width: 100%;
+      }
+
       nav {
         justify-content: center;
         gap: 10px 14px;
@@ -445,7 +597,12 @@
       }
 
       .hero {
-        padding: 65px 18px;
+        padding: 55px 18px 65px;
+      }
+
+      .hero-logo {
+        width: 115px;
+        height: 115px;
       }
 
       .hero h1 {
@@ -476,6 +633,32 @@
       .section-title h2 {
         font-size: 26px;
       }
+
+      .founder-box {
+        padding: 22px 17px;
+      }
+
+      .founder-image img {
+        width: 220px;
+        height: 260px;
+      }
+
+      .founder-content h2 {
+        font-size: 25px;
+      }
+
+      .student-form {
+        flex-direction: column;
+      }
+
+      .student-form input {
+        width: 100%;
+      }
+
+      .student-form .btn {
+        width: 100%;
+      }
+
     }
 
   </style>
@@ -491,9 +674,18 @@
 
   <header>
 
-    <div class="logo">
-      مركز الشاعر السنغامبي للغة والشعر
+    <div class="brand">
+
+      <img
+        src="logo.png"
+        alt="شعار مركز الشاعر السنغامبي للغة والشعر">
+
+      <div class="logo">
+        مركز الشاعر السنغامبي للغة والشعر
+      </div>
+
     </div>
+
 
     <nav>
 
@@ -509,6 +701,10 @@
         المستويات
       </a>
 
+      <a href="#founder">
+        المؤسس
+      </a>
+
       <a href="#student-portal">
         بوابة الطالب
       </a>
@@ -521,7 +717,9 @@
         class="nav-admin"
         href="https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-admin-page"
         target="_blank">
+
         دخول الإدارة
+
       </a>
 
     </nav>
@@ -538,6 +736,11 @@
     ========================= -->
 
     <section class="hero" id="home">
+
+      <img
+        class="hero-logo"
+        src="logo.png"
+        alt="شعار مركز الشاعر السنغامبي للغة والشعر">
 
       <div class="hero-badge">
         برنامج تعليمي للغة العربية والشعر
@@ -557,13 +760,17 @@
         <a
           class="btn btn-primary"
           href="#student-portal">
+
           بوابة الطالب
+
         </a>
 
         <a
           class="btn btn-secondary"
           href="#tracks">
+
           تعرف على البرنامج
+
         </a>
 
       </div>
@@ -737,6 +944,102 @@
 
 
     <!-- =========================
+         FOUNDER
+    ========================= -->
+
+    <section
+      class="founder-section"
+      id="founder">
+
+
+      <div class="section-title">
+
+        <h2>
+          مؤسس المركز
+        </h2>
+
+        <p>
+          نبذة عن مؤسس مركز الشاعر السنغامبي للغة والشعر
+        </p>
+
+      </div>
+
+
+      <div class="founder-box">
+
+
+        <div class="founder-image">
+
+          <img
+            src="founder.jpg"
+            alt="ممد موسى جالو الملقب بالشاعر السنغامبي">
+
+        </div>
+
+
+
+        <div class="founder-content">
+
+          <h2>
+            ممد موسى جالو
+          </h2>
+
+          <div class="founder-title">
+            الملقب بـ «الشاعر السنغامبي»
+          </div>
+
+
+          <p>
+
+            ممد موسى جالو، الملقب بـ
+            <strong>«الشاعر السنغامبي»</strong>،
+            متخصص في اللغة العربية وآدابها،
+            وله اهتمام باللغة والشعر والكتابة والإبداع الأدبي.
+
+          </p>
+
+
+          <p>
+
+            وله قصائد وأعمال أدبية كثيرة منشورة على صفحاته
+            في <strong>فيسبوك</strong> و<strong>تلغرام</strong>
+            ومنصة <strong>مجتمع</strong>،
+            باسم <strong>«الشاعر السنغامبي»</strong>.
+
+          </p>
+
+
+          <div class="founder-highlight">
+
+            يأتي تأسيس المركز امتدادًا لهذا الاهتمام باللغة العربية
+            والشعر، ورغبةً في تقديم تعليم يجمع بين المعرفة
+            والتطبيق والممارسة والإبداع.
+
+          </div>
+
+
+          <div class="buttons">
+
+            <a
+              class="btn btn-green"
+              href="#student-portal">
+
+              تعرف على برنامج المركز
+
+            </a>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
          STUDENT PORTAL
     ========================= -->
 
@@ -781,11 +1084,20 @@
           <br><br>
 
           <strong>
-            ملاحظة:
+            ملاحظة مهمة:
           </strong>
 
           ملف الطالب للعرض فقط،
           ولا يستطيع الطالب تعديل البيانات المسجلة فيه.
+
+          <br><br>
+
+          <strong>
+            تنبيه:
+          </strong>
+
+          الرابط الخاص بملف الطالب شخصي،
+          ويُرجى عدم مشاركته مع الآخرين.
 
         </div>
 
@@ -828,17 +1140,28 @@
 
 
 
-        <div class="buttons">
+        <div class="student-form">
 
-          <a
+          <input
+            id="studentLink"
+            type="url"
+            placeholder="ألصق رابط ملف الطالب الخاص هنا">
+
+          <button
             class="btn btn-green"
-            href="https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-admin-page"
-            target="_blank">
+            type="button"
+            onclick="openStudentFile()">
 
-            أنا طالب ولدي رابط خاص
+            فتح ملفي
 
-          </a>
+          </button>
 
+        </div>
+
+
+        <div
+          class="student-message"
+          id="studentMessage">
         </div>
 
 
@@ -873,128 +1196,4 @@
 
         <p>
 
-          من خلال لوحة الإدارة يمكن للإدارة متابعة الطلاب،
-          وإدارة ملفاتهم ونتائجهم وحضورهم وإنجازاتهم وتقدمهم،
-          وإنشاء الروابط الخاصة بملفات الطلاب.
-
-        </p>
-
-
-        <div class="buttons">
-
-          <a
-            class="btn btn-green"
-            href="https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-admin-page"
-            target="_blank">
-
-            دخول لوحة الإدارة
-
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         ABOUT
-    ========================= -->
-
-    <section id="about">
-
-
-      <div class="section-title">
-
-        <h2>
-          عن البرنامج
-        </h2>
-
-        <p>
-          منهج تدريجي يجمع بين المعرفة والتطبيق والمتابعة.
-        </p>
-
-      </div>
-
-
-      <div class="about">
-
-
-        <div class="about-box">
-
-          <h3>
-            التدرج
-          </h3>
-
-          <p>
-            ينتقل الطالب بين أربعة مستويات وفق تقدمه
-            ونتائجه في المسار الذي يدرسه.
-          </p>
-
-        </div>
-
-
-
-        <div class="about-box">
-
-          <h3>
-            التطبيق
-          </h3>
-
-          <p>
-            يهتم البرنامج بالممارسة والتطبيق والواجبات
-            والمشروعات والأنشطة، وليس الحفظ وحده.
-          </p>
-
-        </div>
-
-
-
-        <div class="about-box">
-
-          <h3>
-            المتابعة
-          </h3>
-
-          <p>
-            يتم حفظ بيانات الطالب التعليمية في ملف رقمي
-            يساعد الإدارة على متابعة مسيرته في المركز.
-          </p>
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-
-  </main>
-
-
-
-  <!-- =========================
-       FOOTER
-  ========================= -->
-
-  <footer>
-
-    <div class="footer-title">
-      مركز الشاعر السنغامبي للغة والشعر
-    </div>
-
-    <p>
-      تعليم اللغة العربية والشعر والكتابة والإلقاء
-    </p>
-
-    <p>
-      © 2026 جميع الحقوق محفوظة
-    </p>
-
-  </footer>
-
-
-</body>
-  </html>
+          من خلال لوحة الإدار
