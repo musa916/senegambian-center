@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>مركز الشاعر السنغامبي للغة والشعر</title>
 
@@ -10,15 +10,30 @@
 content="مركز الشاعر السنغامبي للغة والشعر - تعليم اللغة العربية والشعر والكتابة والإلقاء.">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
+
+html{
+scroll-behavior:smooth
+}
+
 body{
 font-family:Tahoma,Arial,sans-serif;
 background:#f5f7f6;
 color:#17211d;
 line-height:1.8
 }
-a{text-decoration:none;color:inherit}
+
+a{
+text-decoration:none;
+color:inherit
+}
+
+/* ================= HEADER ================= */
 
 header{
 background:linear-gradient(90deg,#123b2a,#236448,#9a7630);
@@ -67,13 +82,17 @@ font-size:13px;
 color:#fff
 }
 
-nav a:hover{opacity:.75}
+nav a:hover{
+opacity:.75
+}
 
 .nav-admin{
 border:1px solid #ffffff99;
 padding:6px 12px;
 border-radius:8px
 }
+
+/* ================= HERO ================= */
 
 .hero{
 background:
@@ -123,6 +142,8 @@ gap:10px;
 flex-wrap:wrap
 }
 
+/* ================= BUTTONS ================= */
+
 .btn{
 display:inline-block;
 padding:11px 21px;
@@ -133,12 +154,32 @@ cursor:pointer;
 font-family:inherit
 }
 
-.white{background:#fff;color:#123b2a}
-.outline{border:1px solid #fff;color:#fff;background:transparent}
-.green{background:#123b2a;color:#fff}
-.gold{background:#b28732;color:#fff}
+.white{
+background:#fff;
+color:#123b2a
+}
 
-section{padding:68px 6%}
+.outline{
+border:1px solid #fff;
+color:#fff;
+background:transparent
+}
+
+.green{
+background:#123b2a;
+color:#fff
+}
+
+.gold{
+background:#b28732;
+color:#fff
+}
+
+/* ================= GENERAL ================= */
+
+section{
+padding:68px 6%
+}
 
 .section-title{
 text-align:center;
@@ -151,7 +192,11 @@ font-size:30px;
 margin-bottom:6px
 }
 
-.section-title p{color:#6b7670}
+.section-title p{
+color:#6b7670
+}
+
+/* ================= CARDS ================= */
 
 .cards{
 display:grid;
@@ -198,191 +243,4 @@ color:#5b6660;
 font-size:15px
 }
 
-.center-section{
-background:linear-gradient(135deg,#eef5f1,#f9f6ee)
-}
-
-.about{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px
-}
-
-.programs{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px
-}
-
-.program-icon{
-font-size:30px;
-margin-bottom:10px
-}
-
-.program ul{
-padding-right:20px;
-color:#59645f
-}
-
-.program li{margin:5px 0}
-
-.levels{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:16px
-}
-
-.level{
-background:#fff;
-border:1px solid #e0e8e3;
-border-radius:15px;
-text-align:center;
-padding:25px 14px
-}
-
-.level small{color:#78837e}
-
-.level strong{
-display:block;
-color:#123b2a;
-font-size:22px
-}
-
-/* الإعلانات */
-
-.announcements{
-background:#f0f5f2
-}
-
-.announcement-list{
-max-width:1000px;
-margin:auto;
-display:grid;
-gap:14px
-}
-
-.announcement{
-border-right:5px solid #b28732
-}
-
-.announcement .meta{
-color:#7a8580;
-font-size:12px;
-margin-bottom:6px
-}
-
-.announcement h3{
-color:#123b2a;
-margin-bottom:5px
-}
-
-.announcement p{
-color:#4f5c55;
-white-space:pre-line
-}
-
-.empty{
-text-align:center;
-color:#78837e;
-padding:25px;
-background:#fff;
-border-radius:14px
-}
-
-/* المؤسس */
-
-.founder-section{background:#fff}
-
-.founder{
-max-width:1000px;
-margin:auto;
-display:grid;
-grid-template-columns:300px 1fr;
-gap:42px;
-align-items:center;
-background:#f8faf9;
-border:1px solid #e1e8e3;
-border-radius:20px;
-padding:32px
-}
-
-.founder img{
-width:270px;
-height:310px;
-object-fit:cover;
-border-radius:18px;
-display:block;
-margin:auto;
-box-shadow:0 9px 30px #0002
-}
-
-.founder h2{
-font-size:30px;
-color:#123b2a
-}
-
-.founder .title{
-color:#b28732;
-font-weight:bold;
-margin:5px 0 18px;
-font-size:18px
-}
-
-.founder p{
-color:#59645f;
-margin-bottom:13px
-}
-
-.highlight{
-background:#fff;
-border-right:4px solid #b28732;
-border-radius:8px;
-padding:14px 16px;
-color:#34413b;
-margin-top:16px
-}
-
-/* البوابات */
-
-.portals-section{
-background:linear-gradient(135deg,#eef5f1,#f9f6ee)
-}
-
-.portal-cards{
-max-width:950px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:22px
-}
-
-.portal-card{
-background:#fff;
-border:1px solid #e0e8e3;
-border-radius:18px;
-padding:30px;
-text-align:center;
-box-shadow:0 7px 25px #00000008;
-transition:.2s
-}
-
-.portal-card:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 30px #00000012
-}
-
-.portal-icon{
-width:60px;
-height:60px;
-border-radius:50%;
-background:#e9f2ed;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:29px;
-margin:0 auto 17px
-}
-
-.portal-card h3{
-color:#123b2a;
-margin-bottom:9px;
+/
