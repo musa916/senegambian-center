@@ -1,1511 +1,1492 @@
+
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>مركز الشاعر السنغامبي للغة والشعر</title>
-
-<meta name="description"
-content="مركز الشاعر السنغامبي للغة والشعر - تعليم اللغة العربية والشعر والكتابة والإلقاء.">
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-font-family:Tahoma,Arial,sans-serif;
-background:#f5f7f6;
-color:#17211d;
-line-height:1.8
-}
-a{text-decoration:none;color:inherit}
-
-header{
-background:linear-gradient(90deg,#123b2a,#236448,#9a7630);
-color:#fff;
-padding:12px 6%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:20px;
-flex-wrap:wrap;
-position:sticky;
-top:0;
-z-index:20;
-box-shadow:0 3px 18px #0002
-}
-
-.brand{
-display:flex;
-align-items:center;
-gap:11px
-}
-
-.brand img{
-width:52px;
-height:52px;
-object-fit:contain;
-background:#fff;
-border-radius:50%;
-padding:3px
-}
-
-.brand-name{
-font-size:18px;
-font-weight:bold
-}
-
-nav{
-display:flex;
-gap:9px 15px;
-flex-wrap:wrap;
-align-items:center
-}
-
-nav a{
-font-size:13px;
-color:#fff
-}
-
-nav a:hover{opacity:.75}
-
-.nav-admin{
-border:1px solid #ffffff99;
-padding:6px 12px;
-border-radius:8px
-}
-
-.hero{
-background:
-radial-gradient(circle at top,#2e7d5a,#123b2a 58%,#0b291e);
-color:#fff;
-text-align:center;
-padding:70px 18px 85px
-}
-
-.hero-logo{
-width:155px;
-height:155px;
-object-fit:contain;
-background:#fff;
-border-radius:50%;
-padding:8px;
-box-shadow:0 12px 35px #0004;
-margin-bottom:20px
-}
-
-.badge{
-display:inline-block;
-border:1px solid #ffffff80;
-border-radius:30px;
-padding:5px 15px;
-font-size:13px;
-margin-bottom:15px
-}
-
-.hero h1{
-font-size:40px;
-margin-bottom:15px
-}
-
-.hero p{
-max-width:820px;
-margin:auto;
-font-size:18px;
-opacity:.95
-}
-
-.buttons{
-margin-top:26px;
-display:flex;
-justify-content:center;
-gap:10px;
-flex-wrap:wrap
-}
-
-.btn{
-display:inline-block;
-padding:11px 21px;
-border-radius:9px;
-font-weight:bold;
-border:0;
-cursor:pointer;
-font-family:inherit
-}
-
-.white{background:#fff;color:#123b2a}
-.outline{border:1px solid #fff;color:#fff;background:transparent}
-.green{background:#123b2a;color:#fff}
-.gold{background:#b28732;color:#fff}
-
-section{padding:68px 6%}
-
-.section-title{
-text-align:center;
-margin-bottom:38px
-}
-
-.section-title h2{
-color:#123b2a;
-font-size:30px;
-margin-bottom:6px
-}
-
-.section-title p{color:#6b7670}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px
-}
-
-.card,
-.about-box,
-.program,
-.announcement,
-.contact-card{
-background:#fff;
-border:1px solid #e0e8e3;
-border-radius:16px;
-padding:26px;
-box-shadow:0 7px 25px #00000008
-}
-
-.num{
-width:43px;
-height:43px;
-border-radius:50%;
-background:#e9f2ed;
-color:#123b2a;
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:bold;
-margin-bottom:15px
-}
-
-.card h3,
-.program h3,
-.about-box h3{
-color:#123b2a;
-margin-bottom:9px
-}
-
-.card p,
-.program p,
-.about-box p{
-color:#5b6660;
-font-size:15px
-}
-
-.center-section{
-background:linear-gradient(135deg,#eef5f1,#f9f6ee)
-}
-
-.about{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px
-}
-
-.programs{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px
-}
-
-.program-icon{
-font-size:30px;
-margin-bottom:10px
-}
-
-.program ul{
-padding-right:20px;
-color:#59645f
-}
-
-.program li{margin:5px 0}
-
-.levels{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:16px
-}
-
-.level{
-background:#fff;
-border:1px solid #e0e8e3;
-border-radius:15px;
-text-align:center;
-padding:25px 14px
-}
-
-.level small{color:#78837e}
-
-.level strong{
-display:block;
-color:#123b2a;
-font-size:22px
-}
-
-/* الإعلانات */
-
-.announcements{
-background:#f0f5f2
-}
-
-.announcement-list{
-max-width:1000px;
-margin:auto;
-display:grid;
-gap:14px
-}
-
-.announcement{
-border-right:5px solid #b28732
-}
-
-.announcement .meta{
-color:#7a8580;
-font-size:12px;
-margin-bottom:6px
-}
-
-.announcement h3{
-color:#123b2a;
-margin-bottom:5px
-}
-
-.announcement p{
-color:#4f5c55;
-white-space:pre-line
-}
-
-.empty{
-text-align:center;
-color:#78837e;
-padding:25px;
-background:#fff;
-border-radius:14px
-}
-
-/* المؤسس */
-
-.founder-section{background:#fff}
-
-.founder{
-max-width:1000px;
-margin:auto;
-display:grid;
-grid-template-columns:300px 1fr;
-gap:42px;
-align-items:center;
-background:#f8faf9;
-border:1px solid #e1e8e3;
-border-radius:20px;
-padding:32px
-}
-
-.founder img{
-width:270px;
-height:310px;
-object-fit:cover;
-border-radius:18px;
-display:block;
-margin:auto;
-box-shadow:0 9px 30px #0002
-}
-
-.founder h2{
-font-size:30px;
-color:#123b2a
-}
-
-.founder .title{
-color:#b28732;
-font-weight:bold;
-margin:5px 0 18px;
-font-size:18px
-}
-
-.founder p{
-color:#59645f;
-margin-bottom:13px
-}
-
-.highlight{
-background:#fff;
-border-right:4px solid #b28732;
-border-radius:8px;
-padding:14px 16px;
-color:#34413b;
-margin-top:16px
-}
-
-/* البوابات */
-
-.portals-section{
-background:linear-gradient(135deg,#eef5f1,#f9f6ee)
-}
-
-.portal-cards{
-max-width:950px;
-margin:auto;
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:22px
-}
-
-.portal-card{
-background:#fff;
-border:1px solid #e0e8e3;
-border-radius:18px;
-padding:30px;
-text-align:center;
-box-shadow:0 7px 25px #00000008;
-transition:.2s
-}
-
-.portal-card:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 30px #00000012
-}
-
-.portal-icon{
-width:60px;
-height:60px;
-border-radius:50%;
-background:#e9f2ed;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:29px;
-margin:0 auto 17px
-}
-
-.portal-card h3{
-color:#123b2a;
-margin-bottom:9px;
-font-size:21px
-}
-
-.portal-card p{
-color:#5b6660;
-font-size:15px;
-margin-bottom:18px
-}
-
-/* الطالب */
-
-.portal{
-background:#eaf2ee
-}
-
-.portal-box{
-max-width:950px;
-margin:auto;
-background:#fff;
-padding:40px;
-border-radius:18px;
-box-shadow:0 6px 28px #0000000a
-}
-
-.portal-info{
-background:#f6f8f7;
-border-right:4px solid #123b2a;
-padding:17px;
-border-radius:8px;
-margin:22px 0
-}
-
-.features{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px
-}
-
-.feature{
-padding:13px;
-background:#f8faf9;
-border:1px solid #e2e9e5;
-border-radius:9px
-}
-
-.student-form{
-display:flex;
-gap:9px;
-max-width:720px;
-margin:28px auto 0
-}
-
-.student-form input{
-flex:1;
-padding:12px;
-border:1px solid #ccd7d0;
-border-radius:9px;
-font-family:inherit;
-direction:ltr;
-text-align:left
-}
-
-.message{
-text-align:center;
-min-height:25px;
-color:#66736c;
-font-size:13px;
-margin-top:9px
-}
-
-/* التواصل */
-
-.contact{
-background:linear-gradient(135deg,#123b2a,#236448);
-color:#fff
-}
-
-.contact .section-title h2,
-.contact .section-title p{
-color:#fff
-}
-
-.contact-grid{
-max-width:900px;
-margin:auto;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:18px
-}
-
-.contact-card{
-color:#17211d;
-text-align:center
-}
-
-.contact-card .icon{
-font-size:30px
-}
-
-.contact-card h3{
-color:#123b2a;
-margin:5px
-}
-
-.contact-card p{
-color:#69746e;
-direction:ltr
-}
-
-.contact-card a{
-display:inline-block;
-margin-top:10px
-}
-
-footer{
-background:#0d2c21;
-color:#fff;
-text-align:center;
-padding:35px 20px
-}
-
-.footer-logo{
-width:72px;
-height:72px;
-object-fit:contain;
-background:#fff;
-border-radius:50%;
-padding:4px;
-margin-bottom:10px
-}
-
-.footer-title{
-font-size:18px;
-font-weight:bold
-}
-
-@media(max-width:850px){
-
-.cards,
-.about{
-grid-template-columns:1fr
-}
-
-.levels{
-grid-template-columns:1fr 1fr
-}
-
-.founder{
-grid-template-columns:1fr;
-text-align:center
-}
-
-.programs{
-grid-template-columns:1fr
-}
-
-.portal-cards{
-grid-template-columns:1fr
-}
-
-}
-
-@media(max-width:600px){
-
-header{
-justify-content:center;
-text-align:center
-}
-
-.brand{
-width:100%;
-justify-content:center
-}
-
-nav{
-justify-content:center
-}
-
-.hero{
-padding:50px 16px 65px
-}
-
-.hero-logo{
-width:120px;
-height:120px
-}
-
-.hero h1{
-font-size:28px
-}
-
-.hero p{
-font-size:16px
-}
-
-section{
-padding:52px 17px
-}
-
-.portal-box,
-.founder{
-padding:22px 17px
-}
-
-.features{
-grid-template-columns:1fr
-}
-
-.student-form{
-flex-direction:column
-}
-
-.student-form .btn{
-width:100%
-}
-
-.contact-grid{
-grid-template-columns:1fr
-}
-
-}
-</style>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>
+    مركز الشاعر السنغامبي للغة والشعر
+  </title>
+
+  <meta name="description"
+        content="مركز الشاعر السنغامبي للغة والشعر - مركز تعليمي يهتم باللغة العربية والشعر والعروض والكتابة والإلقاء.">
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        "Noto Sans Arabic",
+        "Tahoma",
+        Arial,
+        sans-serif;
+
+      background: #f6f8f5;
+      color: #17251c;
+      line-height: 1.8;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+
+    /* ================= HEADER ================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      background: rgba(255,255,255,.96);
+
+      backdrop-filter: blur(10px);
+
+      border-bottom:
+        1px solid #dfe8e1;
+    }
+
+    .nav {
+
+      max-width: 1200px;
+
+      margin: auto;
+
+      padding: 14px 20px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      font-weight: 800;
+
+      color: #14532d;
+
+      font-size: 18px;
+    }
+
+    .brand-logo {
+
+      width: 46px;
+      height: 46px;
+
+      border-radius: 50%;
+
+      background: #14532d;
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 22px;
+
+      font-weight: 900;
+    }
+
+    .nav-links {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: center;
+
+      gap: 7px;
+    }
+
+    .nav-links a {
+
+      padding: 8px 11px;
+
+      border-radius: 9px;
+
+      color: #35433a;
+
+      font-size: 14px;
+
+      transition: .2s;
+    }
+
+    .nav-links a:hover {
+
+      background: #e7f1e9;
+
+      color: #14532d;
+    }
+
+
+    /* ================= GENERAL ================= */
+
+    .container {
+
+      width:
+        min(1150px, calc(100% - 32px));
+
+      margin: auto;
+    }
+
+    section {
+
+      padding: 75px 0;
+    }
+
+    .section-title {
+
+      text-align: center;
+
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+
+      font-size: 32px;
+
+      color: #14532d;
+
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+
+      color: #65736a;
+
+      max-width: 700px;
+
+      margin: auto;
+    }
+
+
+    /* ================= HERO ================= */
+
+    .hero {
+
+      min-height: 650px;
+
+      display: flex;
+
+      align-items: center;
+
+      background:
+
+        radial-gradient(
+          circle at 10% 20%,
+          #dcefe1 0,
+          transparent 32%
+        ),
+
+        radial-gradient(
+          circle at 90% 80%,
+          #e6f3e9 0,
+          transparent 32%
+        ),
+
+        #f6f8f5;
+    }
+
+    .hero-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        1.2fr .8fr;
+
+      align-items: center;
+
+      gap: 50px;
+    }
+
+    .hero h1 {
+
+      font-size:
+        clamp(34px, 5vw, 58px);
+
+      line-height: 1.25;
+
+      color: #123c25;
+
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+
+      color: #198754;
+    }
+
+    .hero p {
+
+      font-size: 18px;
+
+      color: #5c6c62;
+
+      max-width: 700px;
+
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 12px;
+    }
+
+    .btn {
+
+      border: none;
+
+      cursor: pointer;
+
+      display: inline-flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding: 13px 22px;
+
+      border-radius: 12px;
+
+      font-weight: 700;
+
+      transition: .2s;
+    }
+
+    .btn-primary {
+
+      background: #14532d;
+
+      color: white;
+    }
+
+    .btn-primary:hover {
+
+      background: #0d3b20;
+
+      transform:
+        translateY(-2px);
+    }
+
+    .btn-secondary {
+
+      background: white;
+
+      color: #14532d;
+
+      border:
+        1px solid #b9cbbb;
+    }
+
+    .btn-secondary:hover {
+
+      background: #edf5ef;
+    }
+
+    .hero-card {
+
+      background: white;
+
+      border-radius: 25px;
+
+      padding: 35px;
+
+      box-shadow:
+        0 18px 50px
+        rgba(20,83,45,.10);
+
+      border:
+        1px solid #e1e9e3;
+
+      text-align: center;
+    }
+
+    .hero-icon {
+
+      width: 130px;
+      height: 130px;
+
+      border-radius: 50%;
+
+      margin:
+        0 auto 20px;
+
+      background: #14532d;
+
+      color: white;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 58px;
+
+      font-weight: 900;
+    }
+
+    .hero-card h3 {
+
+      color: #14532d;
+
+      margin-bottom: 8px;
+    }
+
+    .hero-card p {
+
+      font-size: 15px;
+
+      margin: 0;
+    }
+
+
+    /* ================= ABOUT ================= */
+
+    .about {
+
+      background: white;
+    }
+
+    .about-box {
+
+      max-width: 900px;
+
+      margin: auto;
+
+      text-align: center;
+
+      font-size: 18px;
+
+      color: #4d5c52;
+    }
+
+
+    /* ================= TRACKS ================= */
+
+    .cards {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 20px;
+    }
+
+    .card {
+
+      background: white;
+
+      border:
+        1px solid #e0e8e2;
+
+      border-radius: 18px;
+
+      padding: 28px;
+
+      transition: .25s;
+    }
+
+    .card:hover {
+
+      transform:
+        translateY(-5px);
+
+      box-shadow:
+        0 12px 30px
+        rgba(20,83,45,.09);
+    }
+
+    .card-number {
+
+      width: 45px;
+      height: 45px;
+
+      border-radius: 12px;
+
+      background: #e6f2e9;
+
+      color: #14532d;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-weight: 900;
+
+      margin-bottom: 18px;
+    }
+
+    .card h3 {
+
+      color: #14532d;
+
+      margin-bottom: 10px;
+
+      font-size: 20px;
+    }
+
+    .card p {
+
+      color: #65736a;
+
+      font-size: 15px;
+    }
+
+
+    /* ================= LEVELS ================= */
+
+    .levels {
+
+      background: #eef5ef;
+    }
+
+    .levels-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 15px;
+    }
+
+    .level {
+
+      background: white;
+
+      border-radius: 16px;
+
+      padding: 25px 15px;
+
+      text-align: center;
+
+      border:
+        1px solid #dce7de;
+    }
+
+    .level strong {
+
+      display: block;
+
+      font-size: 18px;
+
+      color: #14532d;
+
+      margin-bottom: 6px;
+    }
+
+    .level span {
+
+      font-size: 13px;
+
+      color: #6c786f;
+    }
+
+
+    /* ================= ANNOUNCEMENTS ================= */
+
+    .announcements {
+
+      background: #f6f8f5;
+    }
+
+    .announcement-list {
+
+      max-width: 900px;
+
+      margin: auto;
+
+      display: grid;
+
+      gap: 20px;
+    }
+
+    .announcement {
+
+      background: white;
+
+      border:
+        1px solid #dce7df;
+
+      border-radius: 20px;
+
+      padding: 25px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(20,83,45,.06);
+    }
+
+    .announcement h3 {
+
+      color: #14532d;
+
+      margin-bottom: 7px;
+
+      font-size: 21px;
+    }
+
+    .announcement-date {
+
+      color: #89958d;
+
+      font-size: 13px;
+
+      margin-bottom: 12px;
+    }
+
+    .announcement p {
+
+      color: #526158;
+
+      white-space: pre-line;
+    }
+
+    .announcement img {
+
+      width: 100%;
+
+      max-height: 380px;
+
+      object-fit: cover;
+
+      border-radius: 14px;
+
+      margin:
+        15px 0;
+    }
+
+    .no-announcements {
+
+      background: white;
+
+      border:
+        1px solid #dce7df;
+
+      border-radius: 20px;
+
+      padding: 30px;
+
+      text-align: center;
+
+      color: #65736a;
+    }
+
+
+    /* ================= PORTALS ================= */
+
+    .portals {
+
+      background: white;
+    }
+
+    .portal-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 25px;
+
+      max-width: 900px;
+
+      margin: auto;
+    }
+
+    .portal {
+
+      border:
+        1px solid #dce7df;
+
+      border-radius: 22px;
+
+      padding: 32px;
+
+      background: #fbfdfb;
+
+      text-align: center;
+    }
+
+    .portal-icon {
+
+      font-size: 45px;
+
+      margin-bottom: 12px;
+    }
+
+    .portal h3 {
+
+      color: #14532d;
+
+      margin-bottom: 8px;
+
+      font-size: 23px;
+    }
+
+    .portal p {
+
+      color: #68766d;
+
+      margin-bottom: 20px;
+
+      font-size: 15px;
+    }
+
+
+    /* ================= STUDENT ================= */
+
+    .student-area {
+
+      margin-top: 35px;
+
+      background: #f2f7f3;
+
+      border:
+        1px solid #dce7df;
+
+      border-radius: 22px;
+
+      padding: 30px;
+
+      display: none;
+    }
+
+    .student-area.active {
+
+      display: block;
+    }
+
+    .student-area h3 {
+
+      color: #14532d;
+
+      margin-bottom: 10px;
+    }
+
+    .student-form {
+
+      display: flex;
+
+      gap: 10px;
+
+      margin-top: 20px;
+    }
+
+    .student-form input {
+
+      flex: 1;
+
+      min-width: 0;
+
+      padding: 14px;
+
+      border-radius: 10px;
+
+      border:
+        1px solid #cbd8ce;
+
+      outline: none;
+
+      background: white;
+
+      direction: ltr;
+
+      text-align: left;
+    }
+
+    .student-form input:focus {
+
+      border-color: #198754;
+    }
+
+    .message {
+
+      margin-top: 12px;
+
+      color: #a33;
+
+      display: none;
+
+      font-size: 14px;
+    }
+
+
+    /* ================= ADMIN ================= */
+
+    .admin-info {
+
+      max-width: 750px;
+
+      margin:
+        30px auto 0;
+
+      background: #f3f7f4;
+
+      border-radius: 15px;
+
+      padding: 18px;
+
+      color: #58665d;
+
+      text-align: center;
+
+      font-size: 14px;
+    }
+
+
+    /* ================= CONTACT ================= */
+
+    #contact {
+
+      background: #f6f8f5;
+    }
+
+
+    /* ================= FOOTER ================= */
+
+    footer {
+
+      background: #102b1b;
+
+      color: #dce9df;
+
+      padding:
+        45px 0 25px;
+    }
+
+    .footer-content {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 30px;
+
+      margin-bottom: 30px;
+    }
+
+    footer h3 {
+
+      color: white;
+
+      margin-bottom: 10px;
+    }
+
+    footer p {
+
+      color: #b9cbbf;
+
+      font-size: 14px;
+    }
+
+    .copyright {
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.12);
+
+      padding-top: 20px;
+
+      text-align: center;
+
+      color: #9eb1a3;
+
+      font-size: 13px;
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 850px) {
+
+      .hero-grid {
+
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+
+        grid-template-columns: 1fr;
+      }
+
+      .levels-grid {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .portal-grid {
+
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+
+        flex-direction: column;
+      }
+
+      .nav-links {
+
+        width: 100%;
+      }
+
+    }
+
+
+    @media (max-width: 550px) {
+
+      section {
+
+        padding: 55px 0;
+      }
+
+      .hero {
+
+        min-height: auto;
+
+        padding: 60px 0;
+      }
+
+      .hero h1 {
+
+        font-size: 35px;
+      }
+
+      .hero p {
+
+        font-size: 16px;
+      }
+
+      .hero-buttons,
+      .student-form {
+
+        flex-direction: column;
+      }
+
+      .btn {
+
+        width: 100%;
+      }
+
+      .levels-grid {
+
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .footer-content {
+
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
 </head>
+
 
 <body>
 
+
+<!-- ================= HEADER ================= -->
+
 <header>
 
-<div class="brand">
+  <div class="nav">
 
-<img
-src="logo.png"
-alt="شعار مركز الشاعر السنغامبي للغة والشعر">
+    <a href="#home"
+       class="brand">
 
-<div class="brand-name">
-مركز الشاعر السنغامبي للغة والشعر
-</div>
+      <div class="brand-logo">
+        م
+      </div>
 
-</div>
+      <span>
+        مركز الشاعر السنغامبي للغة والشعر
+      </span>
 
-<nav>
+    </a>
 
-<a href="#home">الرئيسية</a>
-<a href="#center">عن المركز</a>
-<a href="#programs">البرامج</a>
-<a href="#announcements">الإعلانات</a>
-<a href="#tracks">المسارات</a>
-<a href="#founder">المؤسس</a>
-<a href="#portals">البوابات</a>
-<a href="#student">الطالب</a>
-<a href="#contact">التواصل</a>
 
-<a
-class="nav-admin"
-href="https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-admin-page"
-target="_blank">
+    <nav class="nav-links">
 
-دخول الإدارة
+      <a href="#home">
+        الرئيسية
+      </a>
 
-</a>
+      <a href="#about">
+        عن المركز
+      </a>
 
-</nav>
+      <a href="#tracks">
+        المسارات
+      </a>
+
+      <a href="#levels">
+        المستويات
+      </a>
+
+      <a href="#announcements">
+        الإعلانات
+      </a>
+
+      <a href="#portals">
+        البوابات
+      </a>
+
+      <a href="#contact">
+        التواصل
+      </a>
+
+      <!-- إدارة المركز -->
+
+      <a href="#portals">
+        إدارة المركز
+      </a>
+
+    </nav>
+
+  </div>
 
 </header>
 
 
-<main>
+<!-- ================= HOME ================= -->
 
-<!-- الواجهة -->
+<main id="home">
 
-<section class="hero" id="home">
 
-<img
-class="hero-logo"
-src="logo.png"
-alt="شعار مركز الشاعر السنغامبي للغة والشعر">
+  <section class="hero">
 
-<div class="badge">
-مركز تعليمي للغة العربية والشعر
-</div>
+    <div class="container hero-grid">
 
-<h1>
-مركز الشاعر السنغامبي للغة والشعر
-</h1>
 
-<p>
-بيئة تعليمية متدرجة تجمع بين المعرفة والتطبيق والممارسة،
-وتسعى إلى تنمية الملكة اللغوية والأدبية ومهارات الكتابة
-والتحدث والإلقاء والشعر.
-</p>
+      <div>
 
-<div class="buttons">
+        <h1>
 
-<a class="btn white" href="#student">
-بوابة الطالب
-</a>
+          مركز الشاعر السنغامبي
 
-<a class="btn outline" href="#programs">
-اكتشف برامج المركز
-</a>
+          <span>
+            للغة والشعر
+          </span>
 
-</div>
+        </h1>
 
-</section>
 
+        <p>
 
-<!-- عن المركز -->
+          بيئة تعليمية تهتم باللغة العربية،
+          والشعر، والعروض،
+          والكتابة الإبداعية،
+          والخط والإملاء،
+          ومهارات التحدث والإلقاء.
 
-<section
-class="center-section"
-id="center">
+        </p>
 
-<div class="section-title">
 
-<h2>
-عن المركز
-</h2>
+        <div class="hero-buttons">
 
-<p>
-تعريف موجز بمركز الشاعر السنغامبي للغة والشعر
-</p>
+          <a href="#tracks"
+             class="btn btn-primary">
 
-</div>
+            اكتشف المسارات
 
-<div class="about">
+          </a>
 
-<div class="about-box">
 
-<h3>
-رسالتنا
-</h3>
+          <a href="#portals"
+             class="btn btn-secondary">
 
-<p>
-تقديم تعليم عربي وأدبي متدرج يركز على الفهم والتطبيق،
-ويمنح الطالب فرصة للنمو في المهارات اللغوية والأدبية.
-</p>
+            بوابات المركز
 
-</div>
+          </a>
 
+        </div>
 
-<div class="about-box">
+      </div>
 
-<h3>
-منهجنا
-</h3>
 
-<p>
-لا يقوم البرنامج على الحفظ وحده، بل يجمع بين الدرس
-والتطبيق والواجبات والأنشطة والمشروعات والمتابعة المستمرة.
-</p>
+      <div class="hero-card">
 
-</div>
+        <div class="hero-icon">
+          م
+        </div>
 
 
-<div class="about-box">
+        <h3>
 
-<h3>
-مسيرة الطالب
-</h3>
+          مركز الشاعر السنغامبي للغة والشعر
 
-<p>
-يتدرج الطالب في أربعة مستويات، مع متابعة نتائجه وحضوره
-وإنجازاته وتقدمه في ملف تعليمي رقمي خاص.
-</p>
+        </h3>
 
-</div>
 
-</div>
+        <p>
 
-</section>
+          نحو تعلّمٍ لغوي وشعري يجمع بين
+          المعرفة والتطبيق والممارسة والإبداع.
 
+        </p>
 
-<!-- البرامج -->
+      </div>
 
-<section id="programs">
+    </div>
 
-<div class="section-title">
+  </section>
 
-<h2>
-برامج المركز
-</h2>
 
-<p>
-مجالات تعليمية متكاملة قابلة للتطوير والتوسع
-</p>
+  <!-- ================= ABOUT ================= -->
 
-</div>
+  <section id="about"
+           class="about">
 
-<div class="programs">
+    <div class="container">
 
-<div class="program">
 
-<div class="program-icon">📚</div>
+      <div class="section-title">
 
-<h3>
-برنامج اللغة العربية
-</h3>
+        <h2>
+          عن المركز
+        </h2>
 
-<p>
-برنامج متدرج في النحو والصرف والبلاغة، مع التركيز
-على استعمال القواعد في القراءة والكتابة.
-</p>
+        <p>
+          تعريف موجز برسالة المركز ومجالاته التعليمية.
+        </p>
 
-<ul>
-<li>النحو والصرف</li>
-<li>البلاغة بمستوياتها</li>
-<li>التطبيقات اللغوية</li>
-</ul>
+      </div>
 
-</div>
 
+      <div class="about-box">
 
-<div class="program">
+        <p>
 
-<div class="program-icon">✍️</div>
+          مركز الشاعر السنغامبي للغة والشعر
+          مشروع تعليمي يهتم بتطوير مهارات
+          المتعلمين في اللغة العربية والشعر
+          والكتابة والتحدث والإلقاء، من خلال
+          مسارات ومستويات تعليمية متدرجة،
+          مع التركيز على التطبيق والممارسة
+          والانضباط.
 
-<h3>
-برنامج الخط والإملاء والتحدث والإلقاء
-</h3>
+        </p>
 
-<p>
-تنمية مهارات الكتابة والخط والإملاء والتعبير الشفهي
-والإلقاء أمام الجمهور.
-</p>
+      </div>
 
-<ul>
-<li>الخط والإملاء</li>
-<li>مهارة التحدث</li>
-<li>الإلقاء والتعبير</li>
-</ul>
+    </div>
 
-</div>
+  </section>
 
 
-<div class="program">
+  <!-- ================= TRACKS ================= -->
 
-<div class="program-icon">🪶</div>
+  <section id="tracks">
 
-<h3>
-برنامج العروض والشعر والنقد والكتابة الإبداعية
-</h3>
+    <div class="container">
 
-<p>
-دراسة العروض والقافية والشعر والنقد، والتدرب على
-الكتابة الإبداعية وصناعة النص.
-</p>
 
-<ul>
-<li>العروض والتقطيع</li>
-<li>الشعر والقافية</li>
-<li>النقد والكتابة الإبداعية</li>
-</ul>
+      <div class="section-title">
 
-</div>
+        <h2>
+          المسارات التعليمية
+        </h2>
 
+        <p>
 
-<div class="program">
+          يمكن للطالب اختيار مسار واحد
+          أو مسارين وفق النظام المعتمد
+          في المركز.
 
-<div class="program-icon">🏆</div>
+        </p>
 
-<h3>
-المتابعة والملف التعليمي الرقمي
-</h3>
+      </div>
 
-<p>
-ملف خاص لكل طالب لمتابعة البيانات والنتائج والحضور
-والإنجازات والتقدم، مع رابط خاص للعرض.
-</p>
 
-<ul>
-<li>متابعة النتائج</li>
-<li>سجل الحضور</li>
-<li>الإنجازات والتقدم</li>
-</ul>
+      <div class="cards">
 
-</div>
 
-</div>
+        <div class="card">
 
-</section>
+          <div class="card-number">
+            ١
+          </div>
 
+          <h3>
+            النحو والصرف والبلاغة
+          </h3>
 
-<!-- المسارات -->
+          <p>
 
-<section id="tracks">
+            دراسة النحو والصرف والبلاغة،
+            مع العناية بالفهم والتطبيق
+            وتحليل النصوص العربية.
 
-<div class="section-title">
+          </p>
 
-<h2>
-المسارات التعليمية
-</h2>
+        </div>
 
-<p>
-يمكن للطالب اختيار مسار واحد أو مسارين في الوقت نفسه.
-</p>
 
-</div>
+        <div class="card">
 
-<div class="cards">
+          <div class="card-number">
+            ٢
+          </div>
 
-<div class="card">
+          <h3>
+            الخط والإملاء ومهارة التحدث والإلقاء
+          </h3>
 
-<div class="num">1</div>
+          <p>
 
-<h3>
-النحو والصرف والبلاغة
-</h3>
+            تطوير الكتابة الصحيحة، والخط،
+            والإملاء، والتحدث، والإلقاء،
+            والتعبير أمام الجمهور.
 
-<p>
-دراسة متدرجة للنحو والصرف والبلاغة، مع التركيز
-على الفهم والتطبيق.
-</p>
+          </p>
 
-</div>
+        </div>
 
 
-<div class="card">
+        <div class="card">
 
-<div class="num">2</div>
+          <div class="card-number">
+            ٣
+          </div>
 
-<h3>
-الخط والإملاء ومهارة التحدث والإلقاء
-</h3>
+          <h3>
+            العروض والشعر والنقد والكتابة الإبداعية
+          </h3>
 
-<p>
-تنمية الكتابة والخط والإملاء، وتحسين التحدث
-والتعبير والإلقاء.
-</p>
+          <p>
 
-</div>
+            دراسة العروض والقافية والشعر
+            والنقد والكتابة الإبداعية
+            والتطبيقات الأدبية.
 
+          </p>
 
-<div class="card">
+        </div>
 
-<div class="num">3</div>
+      </div>
 
-<h3>
-العروض والشعر والنقد والكتابة الإبداعية
-</h3>
+    </div>
 
-<p>
-دراسة العروض والشعر والقافية والنقد، والتدريب
-على الكتابة الإبداعية.
-</p>
+  </section>
 
-</div>
 
-</div>
+  <!-- ================= LEVELS ================= -->
 
-</section>
+  <section id="levels"
+           class="levels">
 
+    <div class="container">
 
-<!-- المستويات -->
 
-<section>
+      <div class="section-title">
 
-<div class="section-title">
+        <h2>
+          المستويات التعليمية
+        </h2>
 
-<h2>
-المستويات التعليمية
-</h2>
+        <p>
 
-<p>
-أربعة مستويات متدرجة من التأسيس إلى الإبداع
-</p>
+          أربعة مستويات متدرجة تبدأ من
+          التأسيس وتنتهي بالإبداع.
 
-</div>
+        </p>
 
-<div class="levels">
+      </div>
 
-<div class="level">
-<small>المستوى الأول</small>
-<strong>التأسيس</strong>
-</div>
 
-<div class="level">
-<small>المستوى الثاني</small>
-<strong>التطوير</strong>
-</div>
+      <div class="levels-grid">
 
-<div class="level">
-<small>المستوى الثالث</small>
-<strong>التمكّن</strong>
-</div>
 
-<div class="level">
-<small>المستوى الرابع</small>
-<strong>الإبداع</strong>
-</div>
+        <div class="level">
 
-</div>
+          <strong>
+            التأسيس
+          </strong>
 
-</section>
+          <span>
+            المستوى الأول
+          </span>
 
+        </div>
 
-<!-- الإعلانات -->
 
-<section
-class="announcements"
-id="announcements">
+        <div class="level">
 
-<div class="section-title">
+          <strong>
+            التطوير
+          </strong>
 
-<h2>
-إعلانات المركز
-</h2>
+          <span>
+            المستوى الثاني
+          </span>
 
-<p>
-تظهر هنا إعلانات المركز الجديدة مباشرة من قاعدة البيانات.
-</p>
+        </div>
 
-</div>
 
-<div
-class="announcement-list"
-id="announcementList">
+        <div class="level">
 
-<div class="empty">
-جاري تحميل الإعلانات...
-</div>
+          <strong>
+            التمكّن
+          </strong>
 
-</div>
+          <span>
+            المستوى الثالث
+          </span>
 
-</section>
+        </div>
 
 
-<!-- المؤسس -->
+        <div class="level">
 
-<section
-class="founder-section"
-id="founder">
+          <strong>
+            الإبداع
+          </strong>
 
-<div class="section-title">
+          <span>
+            المستوى الرابع
+          </span>
 
-<h2>
-مؤسس المركز
-</h2>
+        </div>
 
-<p>
-نبذة عن مؤسس مركز الشاعر السنغامبي للغة والشعر
-</p>
+      </div>
 
-</div>
+    </div>
 
+  </section>
 
-<div class="founder">
 
-<div>
+  <!-- ================= ANNOUNCEMENTS ================= -->
 
-<img
-src="founder.jpg"
-alt="ممد موسى جالو الملقب بالشاعر السنغامبي">
+  <section id="announcements"
+           class="announcements">
 
-</div>
+    <div class="container">
 
 
-<div>
+      <div class="section-title">
 
-<h2>
-ممد موسى جالو
-</h2>
+        <h2>
+          إعلانات المركز
+        </h2>
 
-<div class="title">
-الملقب بـ «الشاعر السنغامبي»
-</div>
+        <p>
 
-<p>
-ممد موسى جالو، الملقب بـ
-<strong>«الشاعر السنغامبي»</strong>،
-متخصص في اللغة العربية وآدابها،
-وله اهتمام باللغة والشعر والكتابة والإبداع الأدبي.
-</p>
+          تابع هنا أحدث إعلانات مركز
+          الشاعر السنغامبي للغة والشعر.
 
-<p>
-وله قصائد وأعمال أدبية كثيرة منشورة على صفحاته
-في فيسبوك وتلغرام ومنصة مجتمع باسم
-<strong>«الشاعر السنغامبي»</strong>.
-</p>
+        </p>
 
-<div class="highlight">
+      </div>
 
-جاء تأسيس المركز امتدادًا لهذا الاهتمام باللغة العربية
-والشعر، ورغبةً في تقديم تعليم يجمع بين المعرفة
-والتطبيق والممارسة والإبداع.
 
-</div>
+      <div id="announcementsList">
 
-</div>
+        <div class="no-announcements">
 
-</div>
+          جاري تحميل الإعلانات...
 
-</section>
+        </div>
 
+      </div>
 
-<!-- بوابات المركز -->
+    </div>
 
-<section
-class="portals-section"
-id="portals">
+  </section>
 
-<div class="section-title">
 
-<h2>
-بوابات المركز
-</h2>
+  <!-- ================= PORTALS ================= -->
 
-<p>
-الوصول المباشر إلى الخدمات الرقمية الخاصة بالمركز
-</p>
+  <section id="portals"
+           class="portals">
 
-</div>
+    <div class="container">
 
 
-<div class="portal-cards">
+      <div class="section-title">
 
+        <h2>
+          بوابات المركز
+        </h2>
 
-<!-- بوابة الإدارة -->
+        <p>
 
-<div class="portal-card">
+          الوصول إلى الخدمات الرقمية
+          الخاصة بالإدارة والطلاب.
 
-<div class="portal-icon">
-⚙️
-</div>
+        </p>
 
-<h3>
-بوابة الإدارة
-</h3>
+      </div>
 
-<p>
-دخول إدارة المركز لإدارة ملفات الطلاب والنتائج
-والحضور والإنجازات وإنشاء الروابط الخاصة
-بملفات الطلاب.
-</p>
 
-<a
-class="btn green"
-href="admin.html">
+      <div class="portal-grid">
 
-الدخول إلى بوابة الإدارة
 
-</a>
+        <!-- ================= ADMIN PORTAL ================= -->
 
-</div>
+        <div class="portal">
 
+          <div class="portal-icon">
+            🔐
+          </div>
 
-<!-- بوابة الطالب -->
 
-<div class="portal-card">
+          <h3>
+            بوابة الإدارة
+          </h3>
 
-<div class="portal-icon">
-👨‍🎓
-</div>
 
-<h3>
-بوابة ملف الطالب الرقمي
-</h3>
+          <p>
 
-<p>
-الوصول إلى الملف الأكاديمي الرقمي الخاص بالطالب
-باستخدام الرابط الشخصي الذي تمنحه إدارة المركز.
-</p>
+            الدخول إلى لوحة الإدارة لإدارة
+            الطلاب، النتائج، الحضور،
+            الإنجازات، الملاحظات،
+            والمجموعات والملفات الأكاديمية.
 
-<a
-class="btn gold"
-href="#student">
+          </p>
 
-فتح بوابة الطالب
 
-</a>
+          <a
+            href="https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-admin-page"
+            class="btn btn-primary"
+            target="_blank"
+            rel="noopener"
+          >
 
-</div>
+            الدخول إلى لوحة الإدارة
 
+          </a>
 
-</div>
+        </div>
 
-</section>
 
+        <!-- ================= STUDENT PORTAL ================= -->
 
-<!-- بوابة الطالب -->
+        <div class="portal">
 
-<section
-class="portal"
-id="student">
+          <div class="portal-icon">
+            🎓
+          </div>
 
-<div class="portal-box">
 
-<div class="section-title">
+          <h3>
+            ملف الطالب
+          </h3>
 
-<h2>
-بوابة الطالب
-</h2>
 
-<p>
-الوصول إلى الملف التعليمي الرقمي الخاص بالطالب
-</p>
+          <p>
 
-</div>
+            يمكن للطالب فتح تقريره الأكاديمي
+            الخاص باستخدام الرابط الذي أرسلته
+            إليه إدارة المركز.
 
+          </p>
 
-<div class="portal-info">
 
-<strong>
-كيف يدخل الطالب؟
-</strong>
+          <button
+            class="btn btn-primary"
+            onclick="showStudentArea()"
+          >
 
-<br>
+            فتح ملف الطالب
 
-بعد إعداد الملف من الإدارة، يحصل الطالب على رابط خاص.
-ألصق الرابط في الخانة أدناه لفتح ملفك.
+          </button>
 
-<br><br>
+        </div>
 
-<strong>
-تنبيه:
-</strong>
+      </div>
 
-الرابط شخصي، وملف الطالب للعرض فقط ولا يتيح للطالب
-تعديل البيانات.
 
-</div>
+      <!-- ================= STUDENT LINK ================= -->
 
+      <div id="studentArea"
+           class="student-area">
 
-<div class="features">
 
-<div class="feature">
-👤 البيانات الشخصية والتعليمية
-</div>
+        <h3>
 
-<div class="feature">
-📚 المسارات والمستويات
-</div>
+          فتح التقرير الأكاديمي للطالب
 
-<div class="feature">
-📝 النتائج والتقييمات
-</div>
+        </h3>
 
-<div class="feature">
-📅 سجل الحضور
-</div>
 
-<div class="feature">
-🏆 الإنجازات
-</div>
+        <p>
 
-<div class="feature">
-📈 مستوى التقدم
-</div>
+          الصق هنا الرابط الخاص بملفك
+          الذي أرسلته لك إدارة المركز،
+          ثم اضغط «فتح التقرير».
 
-</div>
+        </p>
 
 
-<div class="student-form">
+        <div class="student-form">
 
-<input
-id="studentLink"
-type="url"
-placeholder="ألصق رابط ملف الطالب الخاص هنا">
 
-<button
-class="btn green"
-onclick="openStudentFile()">
+          <input
+            id="studentLink"
+            type="text"
+            placeholder="ألصق رابط ملف الطالب هنا"
+            autocomplete="off"
+          >
 
-فتح ملفي
 
-</button>
+          <button
+            class="btn btn-primary"
+            onclick="openStudentFile()"
+          >
 
-</div>
+            فتح التقرير
 
-<div
-class="message"
-id="studentMessage">
-</div>
+          </button>
 
-</div>
+        </div>
 
-</section>
 
-
-<!-- التواصل -->
-
-<section
-class="contact"
-id="contact">
-
-<div class="section-title">
-
-<h2>
-تواصل مع المركز
-</h2>
-
-<p>
-للاستفسارات والمتابعة والتواصل مع الإدارة
-</p>
-
-</div>
-
-
-<div class="contact-grid">
-
-
-<div class="contact-card">
-
-<div class="icon">💬</div>
-
-<h3>
-واتساب المركز
-</h3>
-
-<p>
-+220 872 7608 29
-</p>
-
-<a
-class="btn green"
-href="https://wa.me/220872760829"
-target="_blank">
-
-مراسلة المركز عبر واتساب
-
-</a>
-
-</div>
-
-
-<div class="contact-card">
-
-<div class="icon">✉️</div>
-
-<h3>
-البريد الإلكتروني
-</h3>
-
-<p>
-Senegambianpoetcenter4@gmail.com
-</p>
-
-<a
-class="btn gold"
-href="mailto:Senegambianpoetcenter4@gmail.com">
-
-إرسال بريد إلكتروني
-
-</a>
-
-</div>
-
-
-</div>
-
-</section>
-
-</main>
-
-
-<footer>
-
-<img
-class="footer-logo"
-src="logo.png"
-alt="شعار المركز">
-
-<div class="footer-title">
-مركز الشاعر السنغامبي للغة والشعر
-</div>
-
-<p>
-تعليم اللغة العربية والشعر والكتابة والإلقاء
-</p>
-
-<p>
-© 2026 جميع الحقوق محفوظة
-</p>
-
-</footer>
-
-
-<script>
-
-const ANNOUNCEMENTS_URL =
-"https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/center-announcements";
-
-
-function esc(s){
-
-return String(s ?? "").replace(
-/[&<>"']/g,
-m => ({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[m])
-);
-
-}
-
-
-async function loadAnnouncements(){
-
-const box =
-document.getElementById("announcementList");
-
-try{
-
-const response =
-await fetch(ANNOUNCEMENTS_URL);
-
-const data =
-await response.json();
-
-if(!response.ok)
-throw new Error();
-
-const announcements =
-data.data || [];
-
-if(!announcements.length){
-
-box.innerHTML =
-'<div class="empty">لا توجد إعلانات منشورة حاليًا.</div>';
-
-return;
-
-}
-
-
-box.innerHTML =
-announcements.map(item => `
-
-<article class="announcement">
-
-<div class="meta">
-
-${esc(item.announcement_type || "عام")}
-•
-${new Date(item.published_at).toLocaleDateString("ar")}
-
-</div>
-
-<h3>
-${esc(item.title)}
-</h3>
-
-<p>
-${esc(item.body)}
-</p>
-
-</article>
-
-`).join("");
-
-
-}catch(error){
-
-box.innerHTML =
-'<div class="empty">تعذر تحميل الإعلانات حاليًا.</div>';
-
-}
-
-}
-
-
-function openStudentFile(){
-
-const value =
-document.getElementById("studentLink").value.trim();
-
-const message =
-document.getElementById("studentMessage");
-
-if(!value){
-
-message.textContent =
-"يرجى لصق رابط ملف الطالب أولًا.";
-
-return;
-
-}
-
-
-try{
-
-const url =
-new URL(value);
-
-if(
-url.protocol !== "https:" &&
-url.protocol !== "http:"
-)
-throw new Error();
-
-if(
-!url.hostname.includes("supabase.co")
-)
-throw new Error();
-
-
-window.open(
-url.href,
-"_blank",
-"noopener,noreferrer"
-);
-
-message.textContent =
-"تم فتح ملف الطالب في صفحة جديدة.";
-
-}catch(error){
-
-message.textContent =
-"الرابط غير صحيح. يرجى التأكد من نسخه كاملًا من إدارة المركز.";
-
-}
-
-}
-
-
-loadAnnouncements();
-
-</script>
-
-</body>
-  </html>
+        <div id="studentMess
