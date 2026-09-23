@@ -1470,23 +1470,45 @@ function openStudentFile(){
     const url =
       new URL(value);
 
-    if(
-      url.protocol !== "https:" &&
-      url.protocol !== "http:"
-    )
+    if(url.protocol !== "https:")
       throw new Error();
 
     if(
-      !url.hostname.includes("supabase.co") &&
-      !url.hostname.includes("github.io")
-    )
-      throw new Error();
+      url.hostname === "marxsmnibmfjpvpwscvo.supabase.co" &&
+      url.pathname.includes("/functions/v1/student-share/view/")
+    ){
 
-    message.textContent =
-      "جاري فتح ملف الطالب...";
+      const parts =
+        url.pathname.split("/");
 
-    window.location.href =
-      url.href;
+      const index =
+        parts.indexOf("view");
+
+      const token =
+        parts[index + 1];
+
+      if(!token)
+        throw new Error();
+
+      window.location.href =
+        "https://musa916.github.io/senegambian-center/index.html?token=" +
+        encodeURIComponent(token);
+
+      return;
+    }
+
+    if(
+      url.hostname === "musa916.github.io" &&
+      url.pathname.includes("/senegambian-center/")
+    ){
+
+      window.location.href =
+        url.href;
+
+      return;
+    }
+
+    throw new Error();
 
   }catch(error){
 
