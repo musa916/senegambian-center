@@ -2280,52 +2280,51 @@ async function saveSubject(
 
     status:"in_progress",
 
+test_score:
+  val("test") === ""
+    ? null
+    : Number(
+        val("test")
+      ),
 
-    test_score:
-      val("test") === ""
-        ? null
-        : Number(
-            val("test")
-       
+test_total:
+  Number(val("testtotal") || 100),
 
-        test_total:
-          Number(val("testtotal") || 100),
+assignment_score:
+  val("assign") === ""
+    ? null
+    : Number(val("assign")),
 
-        assignment_score:
-          val("assign") === ""
-            ? null
-            : Number(val("assign")),
+assignment_total:
+  Number(val("assigntotal") || 100),
 
-        assignment_total:
-          Number(val("assigntotal") || 100),
+achievement_score:
+  val("achscore") === ""
+    ? null
+    : Number(val("achscore")),
 
-        achievement_score:
-          val("achscore") === ""
-            ? null
-            : Number(val("achscore")),
+achievement_total: 100,
 
-        achievement_total: 100,
+achievement:
+  val("achievement"),
 
-        achievement:
-          val("achievement"),
+test_note:
+  val("testnote"),
 
-        test_note:
-          val("testnote"),
+assignment_note:
+  val("assignnote"),
 
-        assignment_note:
-          val("assignnote"),
+achievement_note:
+  val("achnote"),
 
-        achievement_note:
-          val("achnote"),
+strengths:
+  val("strengths"),
 
-        strengths:
-          val("strengths"),
+weaknesses:
+  val("weaknesses"),
 
-        weaknesses:
-          val("weaknesses"),
-
-        teacher_note:
-          val("teachernote")
+teacher_note:
+  val("teachernote")
       };
 
       try {
