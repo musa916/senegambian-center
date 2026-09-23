@@ -1548,52 +1548,7 @@ function openStudentFile(){
 
 }
 
-async function loadStudentFromToken(){
-
-  const token =
-    new URLSearchParams(
-      window.location.search
-    ).get("token");
-
-  if(!token)
-    return;
-
-  try{
-
-    const response =
-      await fetch(
-        "https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/student-share/view/" +
-        encodeURIComponent(token)
-      );
-
-    const html =
-      await response.text();
-
-    if(!response.ok)
-      throw new Error();
-
-    document.open();
-
-    document.write(html);
-
-    document.close();
-
-  }catch(error){
-
-    const message =
-      document.getElementById("studentMessage");
-
-    if(message){
-
-      message.textContent =
-        "تعذر فتح ملف الطالب. يرجى التأكد من صحة الرابط.";
-
-    }
-
-  }
-
-}
-
+ 
 loadAnnouncements();
 
 </script>
