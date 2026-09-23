@@ -1394,24 +1394,20 @@ function openStudentFile(){
     document.getElementById("studentMessage");
 
   if(!value){
-
     message.textContent =
       "يرجى لصق رابط ملف الطالب أولًا.";
-
     return;
   }
 
   try{
 
-    const url =
-      new URL(value);
+    const url = new URL(value);
 
     if(url.protocol !== "https:")
       throw new Error();
 
     let token = "";
 
-    /* رابط ملف الطالب الذي ترسله الإدارة */
     if(
       url.hostname === "musa916.github.io" &&
       url.pathname.includes("/senegambian-center/")
@@ -1422,7 +1418,6 @@ function openStudentFile(){
 
     }
 
-    /* في حال لصق رابط Supabase مباشرة */
     else if(
       url.hostname === "marxsmnibmfjpvpwscvo.supabase.co" &&
       url.pathname.includes("/functions/v1/student-share/view/")
@@ -1440,22 +1435,65 @@ function openStudentFile(){
     }
 
     else{
-
       throw new Error();
-
     }
 
     if(!token)
       throw new Error();
 
     message.textContent =
-      "جاري فتح ملف الطالب...";
+      "جاري تحميل ملف الطالب...";
 
-    window.location.href =
+    const api =
       "https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/student-share/view/" +
       encodeURIComponent(token);
 
-  }catch(error){
+    fetch(api, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json"
+      },
+      cache: "no-store"
+    })
+
+    .then(async response => {
+
+      const data =
+        await response.json().catch(() => null);
+
+      if(
+        !response.ok ||
+        !data ||
+        !data.html
+      ){
+
+        throw new Error(
+          data && data.error
+            ? data.error
+            : "تعذر تحميل الملف."
+        );
+
+      }
+
+      document.open();
+
+      document.write(data.html);
+
+      document.close();
+
+    })
+
+    .catch(error => {
+
+      message.textContent =
+        error.message ||
+        "تعذر فتح ملف الطالب.";
+
+    });
+
+  }
+
+  catch(error){
 
     message.textContent =
       "تعذر فتح ملف الطالب. يرجى التأكد من أن الرابط كامل وصحيح.";
