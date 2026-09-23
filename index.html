@@ -1385,7 +1385,7 @@ m => ({
 }
 
 
-async function openStudentFile(){
+function openStudentFile(){
 
   const value =
     document.getElementById("studentLink").value.trim();
@@ -1411,14 +1411,14 @@ async function openStudentFile(){
 
     let token = "";
 
-    /* رابط الطالب الذي ترسله الإدارة */
+    /* رابط ملف الطالب الذي ترسله الإدارة */
     if(
       url.hostname === "musa916.github.io" &&
       url.pathname.includes("/senegambian-center/")
     ){
 
       token =
-        new URLSearchParams(url.search).get("token");
+        new URLSearchParams(url.search).get("token") || "";
 
     }
 
@@ -1451,35 +1451,19 @@ async function openStudentFile(){
     message.textContent =
       "جاري فتح ملف الطالب...";
 
-    const response =
-      await fetch(
-        "https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/student-share/view/" +
-        encodeURIComponent(token)
-      );
-
-    const html =
-      await response.text();
-
-    if(!response.ok)
-      throw new Error();
-
-    document.open();
-
-    document.write(html);
-
-    document.close();
+    window.location.href =
+      "https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/student-share/view/" +
+      encodeURIComponent(token);
 
   }catch(error){
 
     message.textContent =
-      "تعذر فتح ملف الطالب. يرجى التأكد من صحة الرابط.";
+      "تعذر فتح ملف الطالب. يرجى التأكد من أن الرابط كامل وصحيح.";
 
   }
 
-} 
+}
 
-
- 
 loadAnnouncements();
 
 </script>
