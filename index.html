@@ -1385,69 +1385,98 @@ m => ({
 }
 
 
-async function loadAnnouncements(){
+async function openStudentFile(){
 
-const box =
-document.getElementById("announcementList");
+  const value =
+    document.getElementById("studentLink").value.trim();
 
-try{
+  const message =
+    document.getElementById("studentMessage");
 
-const response =
-await fetch(ANNOUNCEMENTS_URL);
+  if(!value){
 
-const data =
-await response.json();
+    message.textContent =
+      "يرجى لصق رابط ملف الطالب أولًا.";
 
-if(!response.ok)
-throw new Error();
+    return;
+  }
 
-const announcements =
-data.data || [];
+  try{
 
-if(!announcements.length){
+    const url =
+      new URL(value);
 
-box.innerHTML =
-'<div class="empty">لا توجد إعلانات منشورة حاليًا.</div>';
+    if(url.protocol !== "https:")
+      throw new Error();
 
-return;
+    let token = "";
 
-}
+    /* رابط الطالب الذي ترسله الإدارة */
+    if(
+      url.hostname === "musa916.github.io" &&
+      url.pathname.includes("/senegambian-center/")
+    ){
 
+      token =
+        new URLSearchParams(url.search).get("token");
 
-box.innerHTML =
-announcements.map(item => `
+    }
 
-<article class="announcement">
+    /* في حال لصق رابط Supabase مباشرة */
+    else if(
+      url.hostname === "marxsmnibmfjpvpwscvo.supabase.co" &&
+      url.pathname.includes("/functions/v1/student-share/view/")
+    ){
 
-<div class="meta">
+      const parts =
+        url.pathname.split("/");
 
-${esc(item.announcement_type || "عام")}
-•
-${new Date(item.published_at).toLocaleDateString("ar")}
+      const index =
+        parts.indexOf("view");
 
-</div>
+      token =
+        parts[index + 1] || "";
 
-<h3>
-${esc(item.title)}
-</h3>
+    }
 
-<p>
-${esc(item.body)}
-</p>
+    else{
 
-</article>
+      throw new Error();
 
-`).join("");
+    }
 
-}catch(error){
+    if(!token)
+      throw new Error();
 
-box.innerHTML =
-'<div class="empty">تعذر تحميل الإعلانات حاليًا.</div>';
+    message.textContent =
+      "جاري فتح ملف الطالب...";
 
-}
+    const response =
+      await fetch(
+        "https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/student-share/view/" +
+        encodeURIComponent(token)
+      );
 
-}
+    const html =
+      await response.text();
 
+    if(!response.ok)
+      throw new Error();
+
+    document.open();
+
+    document.write(html);
+
+    document.close();
+
+  }catch(error){
+
+    message.textContent =
+      "تعذر فتح ملف الطالب. يرجى التأكد من صحة الرابط.";
+
+  }
+
+} 
 
 function openStudentFile(){
 
@@ -1566,7 +1595,6 @@ async function loadStudentFromToken(){
 }
 
 loadAnnouncements();
-loadStudentFromToken();
 
 </script>
 
