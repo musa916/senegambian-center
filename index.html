@@ -1451,59 +1451,145 @@ box.innerHTML =
 
 function openStudentFile(){
 
-const value =
-document.getElementById("studentLink").value.trim();
+  const value =
+    document.getElementById("studentLink").value.trim();
 
-const message =
-document.getElementById("studentMessage");
+  const message =
+    document.getElementById("studentMessage");
 
-if(!value){
+  if(!value){
 
-message.textContent =
-"يرجى لصق رابط ملف الطالب أولًا.";
+    message.textContent =
+      "يرجى لصق رابط ملف الطالب أولًا.";
 
-return;
+    return;
+  }
 
-}
+  try{
 
+    const url =
+      new URL(value);
 
-try{
+    if(
+      url.protocol !== "https:" &&
+      url.protocol !== "http:"
+    )
+      throw new Error();
 
-const url =
-new URL(value);
+    if(
+      !url.hostname.includes("supabase.co") &&
+      !url.hostname.includes("github.io")
+    )
+      throw new Error();
 
-if(
-url.protocol !== "https:" &&
-url.protocol !== "http:"
-)
-throw new Error();
+    message.textContent =
+      "جاري فتح ملف الطالب...";
 
-if(
-!url.hostname.includes("supabase.co") &&
-!url.hostname.includes("github.io")
-)
-throw new Error();
+    window.location.href =
+      url.href;
 
-window.open(
-url.href,
-"_blank",
-"noopener,noreferrer"
-);
+  }catch(error){
 
-message.textContent =
-"تم فتح ملف الطالب في صفحة جديدة.";
+    message.textContent =
+      "الرابط غير صحيح. يرجى التأكد من نسخه كاملًا من إدارة المركز.";
 
-}catch(error){
-
-message.textContent =
-"الرابط غير صحيح. يرجى التأكد من نسخه كاملًا من إدارة المركز.";
+  }
 
 }
+
+async function loadStudentFromToken(){
+
+  const token =
+    new URLSearchParams(
+      window.location.search
+    ).get("token");
+
+  if(!token)
+    return;
+
+  try{
+
+    const response =
+      await fetch(
+        "https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/student-share/view/" +
+        encodeURIComponent(token)
+      );
+
+    const html =
+      await response.text();
+
+    if(!response.ok)
+      throw new Error();
+
+    document.open();
+
+    document.write(html);
+
+    document.close();
+
+  }catch(error){
+
+    const message =
+      document.getElementById("studentMessage");
+
+    if(message){
+
+      message.textContent =
+        "تعذر فتح ملف الطالب. يرجى التأكد من صحة الرابط.";
+
+    }
+
+  }
+
+async function loadStudentFromToken(){
+
+  const token =
+    new URLSearchParams(
+      window.location.search
+    ).get("token");
+
+  if(!token)
+    return;
+
+  try{
+
+    const response =
+      await fetch(
+        "https://marxsmnibmfjpvpwscvo.supabase.co/functions/v1/student-share/view/" +
+        encodeURIComponent(token)
+      );
+
+    const html =
+      await response.text();
+
+    if(!response.ok)
+      throw new Error();
+
+    document.open();
+
+    document.write(html);
+
+    document.close();
+
+  }catch(error){
+
+    const message =
+      document.getElementById("studentMessage");
+
+    if(message){
+
+      message.textContent =
+        "تعذر فتح ملف الطالب. يرجى التأكد من صحة الرابط.";
+
+    }
+
+  }
 
 }
 
 
 loadAnnouncements();
+loadStudentFromToken();
 
 </script>
 
