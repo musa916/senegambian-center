@@ -1,0 +1,3542 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>إدارة ملف الطالب | مركز الشاعر السنغامبي</title>
+
+  <style>
+    :root{
+      --ink:#17213b;
+      --muted:#667085;
+      --bg:#f4f6fa;
+      --card:#fff;
+      --line:#e5e7eb;
+      --ok:#087443;
+      --danger:#b42318
+    }
+
+    *{
+      box-sizing:border-box
+    }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      font-family:Tahoma,Arial,sans-serif;
+      color:#182230
+    }
+
+    button,
+    input,
+    select,
+    textarea{
+      font:inherit
+    }
+
+    button{
+      cursor:pointer
+    }
+
+    .top{
+      background:linear-gradient(135deg,#17213b,#263a69);
+      color:#fff;
+      padding:18px 24px;
+      position:sticky;
+      top:0;
+      z-index:20
+    }
+
+    .topin{
+      max-width:1400px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px
+    }
+
+    .brand h1{
+      font-size:20px;
+      margin:0
+    }
+
+    .brand p{
+      margin:5px 0 0;
+      opacity:.75;
+      font-size:12px
+    }
+
+    .top button{
+      background:#fff1;
+      border:1px solid #ffffff44;
+      color:#fff;
+      border-radius:10px;
+      padding:9px 13px
+    }
+
+    .wrap{
+      max-width:1400px;
+      margin:22px auto;
+      padding:0 16px
+    }
+
+    .login{
+      max-width:440px;
+      margin:70px auto;
+      background:#fff;
+      padding:28px;
+      border-radius:20px;
+      box-shadow:0 10px 35px #0001
+    }
+
+    .login h2{
+      text-align:center;
+      margin-top:0
+    }
+
+    .login input{
+      display:block;
+      width:100%;
+      padding:13px;
+      margin:10px 0;
+      border:1px solid #ccd2da;
+      border-radius:9px;
+      box-sizing:border-box
+    }
+
+    .btn{
+      border:0;
+      border-radius:10px;
+      padding:10px 14px;
+      font-weight:700
+    }
+
+    .primary{
+      background:var(--ink);
+      color:#fff
+    }
+
+    .light{
+      background:#eef2f7;
+      color:#17213b
+    }
+
+    .danger{
+      background:#fee4e2;
+      color:var(--danger)
+    }
+
+    .success{
+      background:#dcfae6;
+      color:var(--ok)
+    }
+
+    .hidden{
+      display:none!important
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px
+    }
+
+    .stat{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px
+    }
+
+    .stat b{
+      font-size:25px;
+      display:block
+    }
+
+    .stat span{
+      font-size:12px;
+      color:var(--muted)
+    }
+
+    .toolbar{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      margin:18px 0;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap
+    }
+
+    .toolbar input{
+      flex:1;
+      min-width:220px;
+      padding:11px;
+      border:1px solid #d0d5dd;
+      border-radius:10px
+    }
+
+    .tablewrap{
+      overflow:auto;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px
+    }
+
+    .table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px
+    }
+
+    .table th,
+    .table td{
+      padding:12px;
+      border-bottom:1px solid var(--line);
+      text-align:right;
+      font-size:13px
+    }
+
+    .table th{
+      background:#f8fafc
+    }
+
+    .table tr:hover td{
+      background:#fafcff
+    }
+
+    .panel{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      margin-top:18px
+    }
+
+    .panel h3{
+      margin-top:0
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px
+    }
+
+    .sectionhead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:12px
+    }
+
+    .pill{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:999px;
+      background:#eef2ff;
+      font-size:11px
+    }
+
+    .toast{
+      position:fixed;
+      bottom:18px;
+      left:18px;
+      background:#17213b;
+      color:#fff;
+      padding:12px 16px;
+      border-radius:12px;
+      display:none;
+      z-index:99
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:#0008;
+      z-index:50;
+      overflow:auto;
+      padding:20px
+    }
+
+    .modalbox{
+      max-width:1050px;
+      margin:20px auto;
+      background:#fff;
+      border-radius:20px;
+      padding:20px
+    }
+
+    .modalhead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center
+    }
+
+    .tabs{
+      display:flex;
+      gap:7px;
+      flex-wrap:wrap;
+      margin:15px 0
+    }
+
+    .tab{
+      padding:9px 12px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      background:#fff
+    }
+
+    .tab.active{
+      background:var(--ink);
+      color:#fff
+    }
+
+    .mini{
+      font-size:12px;
+      color:var(--muted)
+    }
+
+    .photoBox{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      flex-wrap:wrap;
+      padding:12px;
+      background:#f8fafc;
+      border:1px solid var(--line);
+      border-radius:12px
+    }
+
+    .photoBox img{
+      width:90px;
+      height:90px;
+      object-fit:cover;
+      border-radius:14px;
+      background:#eef2f7;
+      border:1px solid var(--line)
+    }
+
+    .linkbox{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      background:#f8fafc;
+      border:1px solid var(--line);
+      padding:10px;
+      border-radius:10px;
+      margin:8px 0
+    }
+
+    .linkbox code{
+      direction:ltr;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      flex:1
+    }
+
+    .empty{
+      text-align:center;
+      padding:35px;
+      color:var(--muted)
+    }
+
+    @media(max-width:800px){
+      .stats{
+        grid-template-columns:1fr 1fr
+      }
+
+      .grid2{
+        grid-template-columns:1fr
+      }
+
+      .topin{
+        align-items:flex-start
+      }
+
+      .brand h1{
+        font-size:16px
+      }
+    }
+  </style>
+/head>
+
+<body>
+
+<header class="top">
+  <div class="topin">
+
+    <div class="brand">
+      <h1>مركز الشاعر السنغامبي للغة والشعر</h1>
+      <p>لوحة إدارة الملفات الرقمية للطلاب</p>
+    </div>
+
+    <button id="logout" class="hidden">
+      تسجيل الخروج
+    </button>
+
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- تسجيل الدخول -->
+  <section id="login" class="login">
+
+    <h2>دخول الإدارة</h2>
+
+    <p class="mini">
+      استخدم حساب الإدارة المصرح له في Supabase.
+    </p>
+
+    <div class="field">
+      <label>البريد الإلكتروني</label>
+      <input id="email" type="email">
+    </div>
+
+    <div class="field">
+      <label>كلمة المرور</label>
+      <input id="password" type="password">
+    </div>
+
+    <button
+      class="btn primary"
+      style="width:100%"
+      onclick="login()">
+      دخول
+    </button>
+
+    <p id="loginErr" style="color:#b42318"></p>
+
+  </section>
+
+
+  <!-- لوحة الإدارة -->
+  <section id="app" class="hidden">
+
+    <!-- الإحصائيات -->
+    <div class="stats">
+
+      <div class="stat">
+        <b id="sStudents">0</b>
+        <span>إجمالي الطلاب</span>
+      </div>
+
+      <div class="stat">
+        <b id="sActive">0</b>
+        <span>الطلاب النشطون</span>
+      </div>
+
+      <div class="stat">
+        <b id="sAttend">0</b>
+        <span>سجلات الحضور</span>
+      </div>
+
+      <div class="stat">
+        <b id="sAch">0</b>
+        <span>الإنجازات</span>
+      </div>
+
+    </div>
+
+
+    <!-- البحث والأدوات -->
+    <div class="toolbar">
+
+      <input
+        id="search"
+        placeholder="ابحث باسم الطالب أو رقم الملف أو الهاتف..."
+        oninput="renderStudents()">
+
+      <select
+        id="levelFilter"
+        onchange="renderStudents()">
+
+        <option value="">
+          جميع المسارات
+        </option>
+
+      </select>
+
+      <button
+        class="btn primary"
+        onclick="newStudent()">
+        ＋ طالب جديد
+      </button>
+
+      <button
+        class="btn light"
+        onclick="loadAll()">
+        ↻ تحديث
+      </button>
+
+    </div>
+
+
+    <!-- جدول الطلاب -->
+    <div class="tablewrap">
+
+      <table class="table">
+
+        <thead>
+          <tr>
+            <th>الطالب</th>
+            <th>رقم الملف</th>
+            <th>المستوى</th>
+            <th>المسارات</th>
+            <th>الحالة</th>
+            <th>إجراء</th>
+          </tr>
+        </thead>
+
+        <tbody id="studentsBody"></tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- مجموعات المسارات -->
+    <section class="panel" id="groupsPanel">
+
+      <div class="sectionhead">
+
+        <h3>
+          مجموعات المسارات
+        </h3>
+
+        <button
+          class="btn light"
+          onclick="loadGroups()">
+          ↻ تحديث المجموعات
+        </button>
+
+      </div>
+
+      <p class="mini">
+        ثلاث مسارات لكل مسار مجموعة واحدة.
+  للإدارة فقط:
+        إضافة الطالب إلى المجموعة أو إخراجه منها.
+      </p>
+
+      <div
+        id="groupsGrid"
+        class="grid2">
+      </div>
+
+    </section>
+
+
+    <!-- إدارة الإعلانات -->
+    <section class="panel" id="announcementsPanel">
+
+      <div class="sectionhead">
+
+        <div>
+          <h3>إدارة إعلانات المركز</h3>
+          <div class="mini">إضافة الإعلانات وتعديلها ونشرها أو إخفاؤها من الصفحة الرئيسية.</div>
+        </div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn primary" onclick="newAnnouncement()">＋ إعلان جديد</button>
+          <button class="btn light" onclick="loadAnnouncements()">↻ تحديث</button>
+        </div>
+
+      </div>
+
+      <div id="announcementAdminList"></div>
+
+    </section>
+
+  </section>
+
+</main>
+
+
+<!-- نافذة ملف الطالب -->
+<div id="modal" class="modal hidden">
+
+  <div class="modalbox">
+
+    <div class="modalhead">
+
+      <div>
+        <h2
+          id="mTitle"
+          style="margin:0">
+        </h2>
+
+        <div
+          id="mCode"
+          class="mini">
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px">
+
+        <button
+          class="btn danger"
+          onclick="deleteStudent()">
+          حذف الطالب
+        </button>
+
+        <button
+          class="btn light"
+          onclick="closeModal()">
+          إغلاق
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- تبويبات ملف الطالب -->
+    <div class="tabs">
+
+      <button
+        class="tab active"
+        onclick="tab('profile',this)">
+        البيانات
+      </button>
+
+      <button
+        class="tab"
+        onclick="tab('assessment',this)">
+        تقييم المواد
+      </button>
+
+      <button
+        class="tab"
+        onclick="tab('results',this)">
+        النتائج
+      </button>
+
+      <button
+        class="tab"
+        onclick="tab('attendance',this)">
+        الحضور
+      </button>
+
+      <button
+        class="tab"
+        onclick="tab('achievements',this)">
+        الإنجازات
+      </button>
+
+      <button
+        class="tab"
+        onclick="tab('progress',this)">
+        التقدم
+      </button>
+
+      <button
+        class="tab"
+        onclick="tab('notes',this)">
+        الملاحظات
+      </button>
+
+      <button
+        class="tab"
+        onclick="tab('share',this)">
+        رابط الطالب
+      </button>
+
+    </div>
+
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* ===============================
+   الاتصال بـ Supabase
+   =============================== */
+
+const URL_BASE =
+  "https://marxsmnibmfjpvpwscvo.supabase.co";
+
+const KEY =
+  "sb_publishable_6xBkdRNXh1nTMuDVTywW2g_xGQeAilm";
+
+const API =
+  URL_BASE + "/functions/v1/center-admin-api-v3";
+
+const SHARE =
+  URL_BASE + "/functions/v1/student-share";
+
+
+/* ===============================
+   المتغيرات الرئيسية
+   =============================== */
+
+let token = "";
+
+let students = [];
+
+let levels = [];
+
+let groups = [];
+
+let current = null;
+
+let currentData = null;
+
+
+/* ===============================
+   حماية النصوص
+   =============================== */
+
+const esc = s =>
+  String(s ?? "").replace(
+    /[&<>"']/g,
+    m => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[m])
+  );
+
+
+/* ===============================
+   الاتصال بواجهة الإدارة
+   =============================== */
+
+const api = async (path, opt = {}) => {
+
+  const r = await fetch(
+    API + path,
+    {
+      ...opt,
+
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer " + token,
+        ...(opt.headers || {})
+      }
+    }
+  );
+
+  const d =
+    await r.json().catch(() => ({}));
+
+  if(!r.ok)
+    throw Error(
+      d.error || "حدث خطأ"
+    );
+
+  return d;
+};
+
+
+/* ===============================
+   تسجيل الدخول
+   =============================== */
+
+async function login(){
+
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("password")
+      .value;
+
+  try{
+
+    const r =
+      await fetch(
+        URL_BASE +
+        "/auth/v1/token?grant_type=password",
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":KEY,
+            "Content-Type":"application/json"
+          },
+
+          body:JSON.stringify({
+            email,
+            password
+          })
+        }
+      );
+
+    const d =
+      await r.json();
+
+    if(!r.ok)
+      throw Error(
+        d.error_description ||
+        d.msg ||
+        "بيانات الدخول غير صحيحة"
+      );
+
+    token =
+      d.access_token;
+
+    localStorage.center_admin_token =
+      token;
+
+    await start();
+
+  }catch(e){
+
+    document
+      .getElementById("loginErr")
+      .textContent =
+      e.message;
+
+  }
+}
+
+
+/* ===============================
+   بدء لوحة الإدارة
+   =============================== */
+
+async function start(){
+
+  try{
+
+    await api("/me");
+
+    document
+      .getElementById("login")
+      .classList
+      .add("hidden");
+
+    document
+      .getElementById("app")
+      .classList
+      .remove("hidden");
+
+    document
+      .getElementById("logout")
+      .classList
+      .remove("hidden");
+
+    await loadAll();
+
+  }catch(e){
+
+    localStorage.removeItem(
+      "center_admin_token"
+    );
+
+    token = "";
+
+    document
+      .getElementById("loginErr")
+      .textContent =
+      e.message;
+
+  }
+
+}
+
+
+/* ===============================
+   تحميل بيانات لوحة الإدارة
+   =============================== */
+
+async function loadAll(){
+
+  try{
+
+    const d =
+      await api("/dashboard");
+
+    document
+      .getElementById("sStudents")
+      .textContent =
+      d.students;
+
+    document
+      .getElementById("sAttend")
+      .textContent =
+      d.attendance_records;
+
+    document
+      .getElementById("sAch")
+      .textContent =
+      d.achievements;
+
+
+    const l =
+      await api("/levels");
+
+    levels =
+      l.data || [];
+
+
+    document
+      .getElementById("levelFilter")
+      .innerHTML = `
+        <option value="">
+          جميع المسارات
+        </option>
+
+        <option value="nahw">
+          مسار النحو والصرف والبلاغة
+        </option>
+
+        <option value="khatt">
+          مسار الخط والإملاء ومهارة التحدث والإلقاء
+        </option>
+
+        <option value="arood">
+          مسار العروض والشعر والنقد والكتابة الإبداعية
+        </option>
+      `;
+
+
+    const st =
+      await api("/students");
+
+    students =
+      st.data || [];
+
+
+    document
+      .getElementById("sActive")
+      .textContent =
+      students.filter(
+        x => x.is_active
+      ).length;
+
+
+    renderStudents();
+
+    await loadGroups();
+    await loadAnnouncements();
+
+  }catch(e){
+
+    toast(e.message);
+
+  }
+
+}
+
+
+/* ===============================
+   عرض الطلاب
+   =============================== */
+
+function renderStudents(){
+
+  const q =
+    document
+      .getElementById("search")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const lf =
+    document
+      .getElementById("levelFilter")
+      .value;
+
+
+  const tm = {
+
+    nahw:
+      "النحو والصرف والبلاغة",
+
+    khatt:
+      "الخط والإملاء ومهارة التحدث والإلقاء",
+
+    arood:
+      "العروض والشعر والنقد والكتابة الإبداعية"
+
+  };
+
+
+       const a = students.filter(x =>
+    (!lf ||
+      (x.selected_tracks || []).includes(tm[lf])
+    ) &&
+    (!q ||
+      [
+        x.full_name,
+        x.student_code,
+        x.phone,
+        x.country
+      ]
+      .join(" ")
+      .toLowerCase()
+      .includes(q)
+    )
+  );
+
+
+  document.getElementById("studentsBody").innerHTML =
+    a.length
+
+      ? a.map(x =>
+
+        '<tr>' +
+
+        '<td>' +
+          '<b>' +
+            esc(x.full_name) +
+          '</b>' +
+
+          '<div class="mini">' +
+            esc(x.phone || "") +
+          '</div>' +
+        '</td>' +
+
+        '<td>' +
+          esc(x.student_code || "—") +
+        '</td>' +
+
+        '<td>' +
+          esc(x.level_name || "—") +
+        '</td>' +
+
+        '<td>' +
+          esc(
+            (x.selected_tracks || [])
+              .join("، ") || "—"
+          ) +
+        '</td>' +
+
+        '<td>' +
+          '<span class="pill">' +
+            (
+              x.is_active
+                ? "نشط"
+                : "غير نشط"
+            ) +
+          '</span>' +
+        '</td>' +
+
+        '<td>' +
+          '<button class="btn primary" ' +
+          'onclick="openStudent(\'' +
+            x.id +
+          '\')">' +
+            'فتح الملف' +
+          '</button>' +
+        '</td>' +
+
+        '</tr>'
+
+      ).join("")
+
+      : '<tr>' +
+          '<td colspan="6" class="empty">' +
+            'لا توجد نتائج.' +
+          '</td>' +
+        '</tr>';
+
+}
+
+
+/* ===============================
+   فتح ملف الطالب
+   =============================== */
+
+async function openStudent(id){
+
+  try{
+
+    current = id;
+
+    const d =
+      await api(
+        "/student/" + id
+      );
+
+    currentData = d;
+
+    document
+      .getElementById("mTitle")
+      .textContent =
+      d.data.full_name;
+
+    document
+      .getElementById("mCode")
+      .textContent =
+      "رقم الملف: " +
+      (
+        d.data.student_code ||
+        "—"
+      );
+
+    document
+      .getElementById("modal")
+      .classList
+      .remove("hidden");
+
+    tab(
+      "profile",
+      document.querySelector(".tab")
+    );
+
+  }catch(e){
+
+    toast(e.message);
+
+  }
+
+}
+
+
+/* ===============================
+   إغلاق ملف الطالب
+   =============================== */
+
+function closeModal(){
+
+  document
+    .getElementById("modal")
+    .classList
+    .add("hidden");
+
+}
+
+
+/* ===============================
+   التبويبات
+   =============================== */
+
+function tab(name, btn){
+
+  document
+    .querySelectorAll(".tab")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+  if(btn)
+    btn.classList.add("active");
+
+
+  const c =
+    document.getElementById(
+      "modalContent"
+    );
+
+
+  if(name === "profile")
+    profileTab(c);
+
+  if(name === "assessment")
+    assessmentTab(c);
+
+  if(name === "results")
+    resultsTab(c);
+
+  if(name === "attendance")
+    attendanceTab(c);
+
+  if(name === "achievements")
+    achTab(c);
+
+  if(name === "progress")
+    progressTab(c);
+
+  if(name === "notes")
+    notesTab(c);
+
+  if(name === "share")
+    shareTab(c);
+
+}
+
+
+/* ===============================
+   الحقول
+   =============================== */
+
+function field(
+  k,
+  l,
+  v,
+  t = "input"
+){
+
+  if(t === "select")
+
+    return `
+      <div class="field">
+
+        <label>${l}</label>
+
+        <select id="f_${k}">
+
+          ${
+            levels
+              .map(z =>
+                '<option value="' +
+                z.id +
+                '" ' +
+                (
+                  z.id === v
+                    ? "selected"
+                    : ""
+                ) +
+                ">" +
+                esc(z.name_ar) +
+                "</option>"
+              )
+              .join("")
+          }
+
+        </select>
+
+      </div>
+    `;
+
+
+  return `
+    <div class="field">
+
+      <label>${l}</label>
+
+      <${
+        t === "textarea"
+          ? "textarea"
+          : "input"
+      }
+      id="f_${k}">${
+        esc(v || "")
+      }</${
+        t === "textarea"
+          ? "textarea"
+          : "input"
+      }>
+
+    </div>
+  `;
+}
+
+
+/* ===============================
+   اختيار المسارات
+   =============================== */
+
+function tracksField(selected){
+
+  const opts = [
+
+    "النحو والصرف والبلاغة",
+
+    "الخط والإملاء ومهارة التحدث والإلقاء",
+
+    "العروض والشعر والنقد والكتابة الإبداعية"
+
+  ];
+
+
+  return `
+    <div
+      class="field"
+      style="grid-column:1/-1">
+
+      <label>
+        المسارات المختارة
+        (يمكن اختيار مسارين في الوقت نفسه)
+      </label>
+
+      <div
+        style="display:grid;gap:8px;margin-top:8px">
+
+        ${
+          opts.map(o =>
+
+            '<label style="display:flex;gap:8px;align-items:center">' +
+
+            '<input ' +
+              'type="checkbox" ' +
+              'class="trackChoice" ' +
+              'value="' +
+              o +
+              '" ' +
+
+              (
+                selected.includes(o)
+                  ? "checked"
+                  : ""
+              ) +
+
+            '>' +
+
+            o +
+
+            '</label>'
+
+          ).join("")
+        }
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+/* ===============================
+   تبويب بيانات الطالب
+   =============================== */
+
+function profileTab(c){
+
+  const x =
+    currentData.data;
+
+  const tracks =
+    x.selected_tracks || [];
+
+
+  const groupNames =
+    tracks.length
+
+      ? tracks.map(t =>
+
+          '<span class="pill" style="margin:3px">' +
+            'مجموعة ' +
+            esc(t) +
+          '</span>'
+
+        ).join("")
+
+      : '<span class="mini">' +
+          'لم يُحدد مسار بعد.' +
+        '</span>';
+
+
+  c.innerHTML =
+
+    '<div class="grid2">' +
+
+      field(
+        "full_name",
+        "الاسم الكامل",
+        x.full_name
+      ) +
+
+      field(
+        "student_code",
+        "رقم الملف",
+        x.student_code
+      ) +
+
+      field(
+        "email",
+        "البريد الإلكتروني",
+        x.email
+      ) +
+
+      field(
+        "phone",
+        "الهاتف",
+        x.phone
+      ) +
+
+      field(
+        "country",
+        "الدولة",
+        x.country
+      ) +
+
+      field(
+        "city",
+        "المدينة",
+        x.city
+      ) +
+
+      field(
+        "prior_education",
+        "التعليم السابق",
+        x.prior_education
+      ) +
+
+      field(
+        "primary_track",
+        "المسار الأساسي",
+        x.primary_track
+      ) +
+
+      tracksField(tracks) +
+
+      field(
+        "level_id",
+        "المستوى",
+        x.level_id,
+        "select"
+      ) +
+
+      field(
+        "gender",
+        "الجنس",
+        x.gender
+      ) +
+
+      field(
+        "application_reason",
+        "سبب التسجيل",
+        x.application_reason,
+        "textarea"
+      ) +
+
+      field(
+        "center_reason",
+        "سبب اختيار المركز",
+        x.center_reason,
+        "textarea"
+      ) +
+
+      field(
+        "admin_notes",
+        "ملاحظات الإدارة",
+        x.admin_notes,
+        "textarea"
+      ) +
+
+
+      /* صورة الطالب */
+
+      '<div class="field" style="grid-column:1/-1">' +
+
+        '<label>صورة الطالب</label>' +
+
+        '<div class="photoBox">' +
+
+          '<img ' +
+            'id="studentPhotoPreview" ' +
+            'src="' +
+              esc(x.photo_url || "") +
+            '" ' +
+
+            'onerror="' +
+              "this.style.display='none'" +
+            '" ' +
+
+            (
+              x.photo_url
+                ? ""
+                : 'style="display:none"'
+            ) +
+
+          '>' +
+
+          '<div>' +
+
+            '<input ' +
+              'id="studentPhotoFile" ' +
+              'type="file" ' +
+              'accept="image/jpeg,image/png,image/webp">' +
+
+            '<div ' +
+              'class="mini" ' +
+              'style="margin-top:6px">' +
+
+              'JPG أو PNG أو WebP — بحد أقصى 5MB.' +
+
+            '</div>' +
+
+            '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">' +
+
+            '<button ' +
+              'class="btn light" ' +
+              'onclick="uploadStudentPhoto()">' +
+              'رفع الصورة وحفظها' +
+            '</button>' +
+
+            (x.photo_url ?
+              '<button class="btn danger" onclick="deleteStudentPhoto()">حذف الصورة</button>' :
+              '') +
+
+            '</div>' +
+
+          '</div>' +
+
+        '</div>' +
+
+      '</div>' +
+
+
+            /* شهادة الطالب */
+
+      '<div class="field" style="grid-column:1/-1">' +
+
+        '<label>شهادة الطالب</label>' +
+
+        '<div class="photoBox">' +
+
+          '<div style="width:100%">' +
+
+            (
+              x.certificate_url
+                ? '<div class="mini">تم رفع شهادة الطالب.</div>' +
+                  '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">' +
+                    '<button class="btn success" onclick="window.open(\'' +
+                      esc(x.certificate_url) +
+                    '\',\'_blank\')">عرض الشهادة</button>' +
+                    '<button class="btn light" onclick="navigator.clipboard.writeText(\'' +
+                      esc(x.certificate_url) +
+                    '\');toast(\'تم نسخ رابط الشهادة\')">نسخ الرابط</button>' +
+                    '<button class="btn danger" onclick="deleteStudentCertificate()">حذف الشهادة</button>' +
+                  '</div>'
+                : '<div class="mini">لم تُرفع شهادة لهذا الطالب بعد.</div>'
+            ) +
+
+          '</div>' +
+
+          '<div style="width:100%">' +
+
+            '<input ' +
+              'id="studentCertificateFile" ' +
+              'type="file" ' +
+              'accept="application/pdf,image/jpeg,image/png">' +
+
+            '<div class="mini" style="margin-top:6px">' +
+              'PDF أو JPG أو PNG — بحد أقصى 10MB.' +
+            '</div>' +
+
+            '<button ' +
+              'class="btn light" ' +
+              'style="margin-top:8px" ' +
+              'onclick="uploadStudentCertificate()">' +
+              'رفع الشهادة وحفظها' +
+            '</button>' +
+
+          '</div>' +
+
+        '</div>' +
+
+      '</div>' +
+
+
+      /* مجموعات الطالب */
+
+      '<div class="field" style="grid-column:1/-1">' +
+
+        '<label>مجموعات الطالب</label>' +
+
+        '<div>' +
+          groupNames +
+        '</div>' +
+
+        '<div class="mini" style="margin-top:6px">' +
+
+          'لكل مسار مجموعة واحدة، ' +
+          'والطالب ذو مسارين يظهر في مجموعتين.' +
+
+        '</div>' +
+
+      '</div>' +
+
+    '</div>' +
+
+
+    '<div style="margin-top:14px">' +
+
+      '<button ' +
+        'class="btn primary" ' +
+        'onclick="saveProfile()">' +
+
+        'حفظ التغييرات' +
+
+      '</button>' +
+
+    '</div>';
+
+}
+
+
+/* ===============================
+   رفع صورة الطالب
+   =============================== */
+
+async function uploadStudentPhoto(){
+
+  const f =
+    document
+      .getElementById(
+        "studentPhotoFile"
+      )
+      ?.files?.[0];
+
+
+  if(!f)
+    return toast(
+      "اختر صورة أولًا"
+    );
+
+
+  if(
+    f.size >
+    5 * 1024 * 1024
+  )
+    return toast(
+      "حجم الصورة أكبر من 5MB"
+    );
+
+
+  if(
+    ![
+      "image/jpeg",
+      "image/png",
+      "image/webp"
+    ].includes(f.type)
+  )
+    return toast(
+      "صيغة الصورة غير مدعومة"
+    );
+
+
+  try{
+
+    const ext =
+      f.type === "image/png"
+        ? "png"
+        : f.type === "image/webp"
+          ? "webp"
+          : "jpg";
+
+
+    const path =
+      "student-" +
+      current +
+      "." +
+      ext;
+
+
+    const r =
+      await fetch(
+        URL_BASE +
+        "/storage/v1/object/student-photos/" +
+        path,
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":KEY,
+            "Authorization":
+              "Bearer " + token,
+            "Content-Type":f.type,
+            "x-upsert":"true"
+          },
+
+          body:f
+        }
+      );
+
+
+    if(!r.ok){
+
+      const tx =
+        await r.text();
+
+      throw Error(
+        tx ||
+        "تعذر رفع الصورة"
+      );
+
+    }
+
+
+    const url =
+      URL_BASE +
+      "/storage/v1/object/public/student-photos/" +
+      path +
+      "?v=" +
+      Date.now();
+
+
+    const d =
+      await api(
+        "/student/" + current,
+        {
+          method:"PATCH",
+
+          body:JSON.stringify({
+            photo_url:url
+          })
+        }
+      );
+
+
+    currentData.data =
+      d.data;
+
+
+    toast(
+      "تم رفع صورة الطالب وحفظها"
+    );
+
+
+    profileTab(
+      document.getElementById(
+        "modalContent"
+      )
+    );
+
+
+  }catch(e){
+
+    toast(e.message);
+
+  }
+
+}
+
+
+/* ===============================
+   حذف صورة الطالب
+   =============================== */
+
+async function deleteStudentPhoto(){
+
+  if(!current) return;
+  if(!confirm("حذف صورة الطالب نهائيًا؟")) return;
+
+  try{
+    for(const ext of ["jpg","png","webp"]){
+      await fetch(
+        URL_BASE + "/storage/v1/object/student-photos/student-" + current + "." + ext,
+        {
+          method:"DELETE",
+          headers:{
+            "apikey":KEY,
+            "Authorization":"Bearer " + token
+          }
+        }
+      );
+    }
+
+    const d = await api("/student/" + current,{
+      method:"PATCH",
+      body:JSON.stringify({photo_url:null})
+    });
+
+    currentData.data = d.data;
+    toast("تم حذف صورة الطالب");
+    profileTab(document.getElementById("modalContent"));
+
+  }catch(e){
+    toast(e.message || "تعذر حذف الصورة");
+  }
+}
+
+
+/* ===============================
+   رفع شهادة الطالب
+   =============================== */
+
+async function uploadStudentCertificate(){
+
+  const f =
+    document.getElementById("studentCertificateFile")
+      ?.files?.[0];
+
+  if(!f) return toast("اختر شهادة أولًا");
+  if(f.size > 10 * 1024 * 1024) return toast("حجم الشهادة أكبر من 10MB");
+  if(!["application/pdf","image/jpeg","image/png"].includes(f.type)) return toast("صيغة الشهادة غير مدعومة");
+
+  try{
+    const ext = f.type === "application/pdf" ? "pdf" : f.type === "image/png" ? "png" : "jpg";
+    const path = "student-" + current + "." + ext;
+    const r = await fetch(URL_BASE + "/storage/v1/object/student-certificates/" + path, {
+      method:"POST",
+      headers:{"apikey":KEY,"Authorization":"Bearer " + token,"Content-Type":f.type,"x-upsert":"true"},
+      body:f
+    });
+    if(!r.ok){ const tx=await r.text(); throw Error(tx || "تعذر رفع الشهادة"); }
+    const url = URL_BASE + "/storage/v1/object/public/student-certificates/" + path + "?v=" + Date.now();
+    const d = await api("/student/" + current, {method:"PATCH",body:JSON.stringify({certificate_url:url})});
+    currentData.data = d.data;
+    toast("تم رفع شهادة الطالب وحفظها");
+    profileTab(document.getElementById("modalContent"));
+  }catch(e){ toast(e.message); }
+}
+
+
+/* ===============================
+   حذف شهادة الطالب
+   =============================== */
+
+async function deleteStudentCertificate(){
+
+  if(!current) return;
+  if(!confirm("حذف شهادة الطالب نهائيًا؟")) return;
+
+  try{
+    for(const ext of ["pdf","jpg","png"]){
+      await fetch(
+        URL_BASE + "/storage/v1/object/student-certificates/student-" + current + "." + ext,
+        {
+          method:"DELETE",
+          headers:{
+            "apikey":KEY,
+            "Authorization":"Bearer " + token
+          }
+        }
+      );
+    }
+
+    const d = await api("/student/" + current,{
+      method:"PATCH",
+      body:JSON.stringify({certificate_url:null})
+    });
+
+    currentData.data = d.data;
+    toast("تم حذف شهادة الطالب");
+    profileTab(document.getElementById("modalContent"));
+
+  }catch(e){
+    toast(e.message || "تعذر حذف الشهادة");
+  }
+}
+
+
+/* ===============================
+   حفظ بيانات الطالب
+   =============================== */
+
+async function saveProfile(){
+
+  const b = {};
+
+
+  [
+    "full_name",
+    "student_code",
+    "email",
+    "phone",
+    "country",
+    "city",
+    "prior_education",
+    "primary_track",
+    "application_reason",
+    "center_reason",
+    "admin_notes",
+    "gender"
+
+  ].forEach(k => {
+
+    b[k] =
+      document
+        .getElementById(
+          "f_" + k
+        )
+        .value;
+
+  });
+
+
+  b.selected_tracks =
+    [
+      ...document
+        .querySelectorAll(
+          ".trackChoice:checked"
+        )
+    ].map(
+      x => x.value
+    );
+
+
+  b.level_id =
+    document
+      .getElementById(
+        "f_level_id"
+      )
+      .value;
+
+
+  try{
+
+    const d =
+      await api(
+        "/student/" + current,
+        {
+          method:"PATCH",
+          body:JSON.stringify(b)
+        }
+      );
+
+
+    currentData.data =
+      d.data;
+
+
+    /* تحديث مجموعات الطالب */
+
+    for(const g of groups){
+
+      const wanted =
+        b.selected_tracks
+          .includes(g.name);
+
+
+      const member =
+        (
+          g.center_track_group_members ||
+          []
+        ).some(
+          m =>
+            m.student_id === current
+        );
+
+
+      if(wanted && !member){
+
+        await api(
+          "/track_group_members",
+          {
+            method:"POST",
+
+            body:JSON.stringify({
+              group_id:g.id,
+              student_id:current
+            })
+          }
+        );
+
+      }
+
+
+      if(!wanted && member){
+
+        await api(
+          "/track_group_members?group_id=" +
+          encodeURIComponent(g.id) +
+          "&student_id=" +
+          encodeURIComponent(current),
+          {
+            method:"DELETE"
+          }
+        );
+
+      }
+
+    }
+
+
+    toast(
+      "تم حفظ بيانات الطالب"
+    );
+
+
+    await loadGroups();
+
+    profileTab(
+      document.getElementById(
+        "modalContent"
+      )
+    );
+
+  }catch(e){
+
+    toast(
+      e.message
+    );
+
+  }
+
+}
+
+/* ===============================
+   المواد والمسارات
+   =============================== */
+
+const subjectMap = {
+
+  nahw:[
+    "النحو",
+    "الصرف",
+    "البلاغة"
+  ],
+
+  khatt:[
+    "الخط",
+    "الإملاء",
+    "مهارة التحدث والإلقاء"
+  ],
+
+  arood:[
+    "العروض",
+    "الشعر",
+    "النقد",
+    "الكتابة الإبداعية"
+  ]
+
+};
+
+
+const trackNames = {
+
+  nahw:
+    "النحو والصرف والبلاغة",
+
+  khatt:
+    "الخط والإملاء ومهارة التحدث والإلقاء",
+
+  arood:
+    "العروض والشعر والنقد والكتابة الإبداعية"
+
+};
+
+
+function selectedTrackCodes(){
+
+  const t =
+    currentData.data.selected_tracks ||
+    [];
+
+  return Object.keys(trackNames)
+    .filter(
+      k =>
+        t.includes(
+          trackNames[k]
+        )
+    );
+
+}
+
+
+function assessmentRecord(
+  code,
+  subject
+){
+
+  return (
+    currentData.progress || []
+  ).find(
+    r =>
+      r.track_code === code &&
+      r.subject_name === subject
+  ) || {};
+
+}
+
+
+function avgRecord(r){
+
+  const a = [];
+
+
+  if(
+    r.test_score !== null &&
+    r.test_score !== undefined &&
+    r.test_score !== ""
+  ){
+
+    a.push(
+      Number(r.test_score) /
+      (Number(r.test_total) || 100) *
+      100
+    );
+
+  }
+
+
+  if(
+    r.assignment_score !== null &&
+    r.assignment_score !== undefined &&
+    r.assignment_score !== ""
+  ){
+
+    a.push(
+      Number(r.assignment_score) /
+      (Number(r.assignment_total) || 100) *
+      100
+    );
+
+  }
+
+
+  if(
+    r.achievement_score !== null &&
+    r.achievement_score !== undefined &&
+    r.achievement_score !== ""
+  ){
+
+    a.push(
+      Number(r.achievement_score) /
+      (Number(r.achievement_total) || 100) *
+      100
+    );
+
+  }
+
+
+  return a.length
+    ? Math.round(
+        a.reduce(
+          (x,y) => x + y,
+          0
+        ) / a.length
+      )
+    : null;
+
+}
+
+
+/* ===============================
+   تبويب تقييم المواد
+   =============================== */
+
+function assessmentTab(c){
+
+  const codes =
+    selectedTrackCodes();
+
+
+  c.innerHTML =
+
+    '<div class="panel">' +
+
+      '<h3>التقييم التفصيلي للمواد</h3>' +
+
+      '<p class="mini">' +
+
+        'لكل مادة: درجة الاختبار، درجة الواجب، الإنجاز، ' +
+        'وملاحظة مستقلة لكل عنصر، إضافة إلى نقاط القوة ' +
+        'والجوانب التي تحتاج إلى تحسين وملاحظة المعلم وملاحظة الإدارة. ' +
+        'المتوسط المعروض هنا يحسب من العناصر الرقمية التي أُدخلت فقط.' +
+
+      '</p>' +
+
+    '</div>' +
+
+
+    (
+
+      codes.map(code =>
+
+        '<div class="panel">' +
+
+          '<h3>' +
+            'مسار ' +
+            trackNames[code] +
+          '</h3>' +
+
+          subjectMap[code]
+            .map(
+              subjectCard.bind(
+                null,
+                code
+              )
+            )
+            .join("")
+
+        +'</div>'
+
+      ).join("")
+
+      ||
+
+      '<div class="empty">' +
+        'لم يُحدد للطالب أي مسار.' +
+      '</div>'
+
+    );
+
+}
+
+
+/* ===============================
+   بطاقة المادة
+   =============================== */
+
+function subjectCard(
+  code,
+  subject
+){
+
+  const r =
+    assessmentRecord(
+      code,
+      subject
+    );
+
+
+  const id =
+    code +
+    "_" +
+    encodeURIComponent(subject);
+
+
+  const av =
+    avgRecord(r);
+
+
+  return `
+
+    <div
+      class="panel"
+      style="background:#fbfcfe">
+
+      <h3>
+        ${esc(subject)}
+      </h3>
+
+      <div class="grid2">
+
+        <div class="field">
+
+          <label>
+            درجة الاختبار
+          </label>
+
+          <input
+            id="test_${id}"
+            type="number"
+            min="0"
+            step="0.01"
+            value="${esc(
+              r.test_score ?? ""
+            )}">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            من
+          </label>
+
+          <input
+            id="testtotal_${id}"
+            type="number"
+            min="1"
+            value="${esc(
+              r.test_total ?? 100
+            )}">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            درجة الواجب
+          </label>
+
+          <input
+            id="assign_${id}"
+            type="number"
+            min="0"
+            step="0.01"
+            value="${esc(
+              r.assignment_score ?? ""
+            )}">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            من
+          </label>
+
+          <input
+            id="assigntotal_${id}"
+            type="number"
+            min="1"
+            value="${esc(
+              r.assignment_total ?? 100
+            )}">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            درجة الإنجاز (اختياري)
+          </label>
+
+          <input
+            id="achscore_${id}"
+            type="number"
+            min="0"
+            step="0.01"
+            value="${esc(
+              r.achievement_score ?? ""
+            )}">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            الإنجاز / وصفه
+          </label>
+
+          <textarea
+            id="achievement_${id}">${esc(
+              r.achievement || ""
+            )}</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            ملاحظة الاختبار
+          </label>
+
+          <textarea
+            id="testnote_${id}">${esc(
+              r.test_note || ""
+            )}</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            ملاحظة الواجب
+          </label>
+
+          <textarea
+            id="assignnote_${id}">${esc(
+              r.assignment_note || ""
+            )}</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            ملاحظة الإنجاز
+          </label>
+
+          <textarea
+            id="achnote_${id}">${esc(
+              r.achievement_note || ""
+            )}</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            نقاط القوة
+          </label>
+
+          <textarea
+            id="strengths_${id}">${esc(
+              r.strengths || ""
+            )}</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            نقاط تحتاج إلى تحسين
+          </label>
+
+          <textarea
+            id="weaknesses_${id}">${esc(
+              r.weaknesses || ""
+            )}</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            ملاحظة المعلم
+          </label>
+
+          <textarea
+            id="teachernote_${id}">${esc(
+              r.teacher_note || ""
+            )}</textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            ملاحظة الإدارة
+          </label>
+
+          <textarea
+            id="adminnote_${id}">${esc(
+              r.admin_note || ""
+            )}</textarea>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="mini"
+        style="margin-top:8px">
+
+        المتوسط المتاح لهذه المادة:
+
+        <b>
+          ${
+            av === null
+              ? "—"
+              : av + "%"
+          }
+        </b>
+
+      </div>
+
+
+      <button
+        class="btn primary"
+        style="margin-top:10px"
+        onclick="saveSubject('${code}','${subject.replace(/'/g,"\\'")}')">
+
+        حفظ تقييم المادة
+
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ===============================
+   حفظ تقييم المادة
+   =============================== */
+
+async function saveSubject(
+  code,
+  subject
+){
+
+  const id =
+    code +
+    "_" +
+    encodeURIComponent(subject);
+
+
+  const val =
+    k =>
+      document
+        .getElementById(
+          k + "_" + id
+        )
+        ?.value ?? "";
+
+
+  const body = {
+
+    student_id:current,
+
+    level_id:
+      currentData.data.level_id,
+
+    track_code:code,
+
+    subject_name:subject,
+
+    status:"in_progress",
+
+test_score:
+  val("test") === ""
+    ? null
+    : Number(
+        val("test")
+      ),
+
+test_total:
+  Number(val("testtotal") || 100),
+
+assignment_score:
+  val("assign") === ""
+    ? null
+    : Number(val("assign")),
+
+assignment_total:
+  Number(val("assigntotal") || 100),
+
+achievement_score:
+  val("achscore") === ""
+    ? null
+    : Number(val("achscore")),
+
+achievement_total: 100,
+
+achievement:
+  val("achievement"),
+
+test_note:
+  val("testnote"),
+
+assignment_note:
+  val("assignnote"),
+
+achievement_note:
+  val("achnote"),
+
+strengths:
+  val("strengths"),
+
+weaknesses:
+  val("weaknesses"),
+
+teacher_note:
+  val("teachernote"),
+
+admin_note:
+  val("adminnote")
+      };
+
+      try {
+        const old =
+          (currentData.progress || []).find(
+            r =>
+              r.track_code === code &&
+              r.subject_name === subject
+          );
+
+        if (old) {
+          await api(
+            "/student_progress/" + old.id,
+            {
+              method: "PATCH",
+              body: JSON.stringify(body)
+            }
+          );
+        } else {
+          await api(
+            "/student_progress",
+            {
+              method: "POST",
+              body: JSON.stringify(body)
+            }
+          );
+        }
+
+        currentData =
+          await api("/student/" + current);
+
+        toast(
+          "تم حفظ تقييم مادة " + subject
+        );
+
+        assessmentTab(
+          document.getElementById("modalContent")
+        );
+
+      } catch (e) {
+        toast(e.message);
+      }
+    }
+
+
+function resultsTab(c) {
+  const a = currentData.results || [];
+
+  c.innerHTML =
+    '<div class="sectionhead">' +
+      '<h3>النتائج</h3>' +
+      '<button class="btn primary" onclick="addResult()">＋ إضافة</button>' +
+    '</div>' +
+
+    (
+      a.length
+        ? a.map(r =>
+            '<div class="panel">' +
+              '<b>' +
+                esc(r.levels?.name_ar || "نتيجة") +
+              '</b>' +
+
+              '<div>' +
+                'الدرجة: ' +
+                esc(r.score) +
+                ' / ' +
+                esc(r.total_points) +
+                ' — ' +
+                esc(r.percentage || "—") +
+                '%' +
+              '</div>' +
+
+              '<div class="mini">' +
+                esc(r.result_status || "") +
+              '</div>' +
+
+            '</div>'
+          ).join("")
+
+        : '<div class="empty">لا توجد نتائج.</div>'
+    );
+}
+
+
+async function addResult() {
+  const score = prompt("الدرجة:");
+  if (score === null) return;
+
+  const total =
+    prompt("الدرجة الكلية:", "100");
+
+  if (total === null) return;
+
+  const pct =
+    Number(total)
+      ? Number(score) / Number(total) * 100
+      : 0;
+
+  try {
+
+    await api(
+      "/student_progress",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          student_id: current,
+          level_id: currentData.data.level_id,
+
+          status:
+            pct >= 60
+              ? "passed"
+              : "failed",
+
+          result_score: pct,
+
+          grade:
+            pct >= 90
+              ? "ممتاز"
+              : pct >= 80
+                ? "جيد جدًا"
+                : pct >= 70
+                  ? "جيد"
+                  : pct >= 60
+                    ? "مقبول"
+                    : "غير مجتاز"
+        })
+      }
+    );
+
+    toast("تم حفظ النتيجة");
+
+    const d =
+      await api("/student/" + current);
+
+    currentData = d;
+
+    resultsTab(
+      document.getElementById("modalContent")
+    );
+
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+function attendanceTab(c) {
+  const a = currentData.attendance || [];
+
+  c.innerHTML =
+    '<div class="sectionhead">' +
+      '<h3>الحضور</h3>' +
+      '<button class="btn primary" onclick="addAttendance()">＋ تسجيل</button>' +
+    '</div>' +
+
+    '<div class="tablewrap">' +
+      '<table class="table">' +
+        '<tr>' +
+          '<th>التاريخ</th>' +
+          '<th>المسار</th>' +
+          '<th>الحالة</th>' +
+          '<th>التأخر</th>' +
+          '<th>ملاحظة</th>' +
+        '</tr>' +
+
+        (
+          a.map(r =>
+            '<tr>' +
+              '<td>' + esc(r.session_date) + '</td>' +
+              '<td>' + esc(r.track_code || "") + '</td>' +
+              '<td>' + esc(r.status) + '</td>' +
+              '<td>' + esc(r.minutes_late || 0) + '</td>' +
+              '<td>' + esc(r.note || "") + '</td>' +
+            '</tr>'
+          ).join("")
+
+          ||
+
+          '<tr>' +
+            '<td colspan="5" class="empty">' +
+              'لا توجد سجلات.' +
+            '</td>' +
+          '</tr>'
+        ) +
+
+      '</table>' +
+    '</div>';
+}
+
+
+async function addAttendance() {
+  const date =
+    prompt(
+      "تاريخ الجلسة YYYY-MM-DD",
+      new Date().toISOString().slice(0, 10)
+    );
+
+  if (!date) return;
+
+  const status =
+    prompt(
+      "present / absent / late / excused",
+      "present"
+    );
+
+  if (!status) return;
+
+  const track =
+    prompt("رمز المسار");
+
+  try {
+
+    await api(
+      "/attendance_records",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          student_id: current,
+          session_date: date,
+          status: status,
+          track_code: track || null
+        })
+      }
+    );
+
+    toast("تم التسجيل");
+
+    const d =
+      await api("/student/" + current);
+
+    currentData = d;
+
+    attendanceTab(
+      document.getElementById("modalContent")
+    );
+
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+
+function achTab(c) {
+  const a = currentData.achievements || [];
+
+  c.innerHTML =
+    '<div class="sectionhead">' +
+      '<h3>الإنجازات</h3>' +
+      '<button class="btn primary" onclick="addAch()">＋ إضافة</button>' +
+    '</div>' +
+
+    (
+      a.map(r =>
+        '<div class="panel">' +
+          '<b>' +
+            esc(r.title) +
+          '</b>' +
+
+          '<div>' +
+            esc(r.description || "") +
+          '</div>' +
+
+          '<div class="mini">' +
+            esc(r.achievement_type || "") +
+            ' • ' +
+            esc(r.achieved_on || "") +
+          '</div>' +
+        '</div>'
+      ).join("")
+
+      ||
+
+      '<div class="empty">لا توجد إنجازات.</div>'
+    );
+}
+
+
+async function addAch() {
+  const title =
+    prompt("عنوان الإنجاز");
+
+  if (!title) return;
+
+  const desc =
+    prompt("الوصف", "");
+
+  try {
+
+    await api(
+      "/student_achievements",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          student_id: current,
+          title: title,
+          description: desc,
+          achievement_type: "إنجاز"
+        })
+      }
+    );
+
+    toast("تمت الإضافة");
+
+    const d =
+      await api("/student/" + current);
+
+    currentData = d;
+
+    achTab(
+      document.getElementById("modalContent")
+    );
+
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+
+function progressTab(c) {
+  const a = currentData.progress || [];
+
+  c.innerHTML =
+    '<h3>التقدم</h3>' +
+
+    (
+      a.map(r =>
+        '<div class="panel">' +
+
+          '<b>' +
+            esc(r.levels?.name_ar || "") +
+          '</b>' +
+
+          '<div>' +
+            'المسار: ' +
+            esc(r.track_code || "—") +
+          '</div>' +
+
+          '<div>' +
+            'الحالة: ' +
+            esc(r.status || "—") +
+            ' • ' +
+            esc(r.result_score ?? "—") +
+            ' • ' +
+            esc(r.grade || "—") +
+          '</div>' +
+
+        '</div>'
+      ).join("")
+
+      ||
+
+      '<div class="empty">لا توجد بيانات.</div>'
+    );
+}
+
+
+function notesTab(c) {
+  const a = currentData.notes || [];
+
+  c.innerHTML =
+    '<div class="sectionhead">' +
+      '<h3>ملاحظات الإدارة</h3>' +
+      '<button class="btn primary" onclick="addNote()">＋ إضافة</button>' +
+    '</div>' +
+
+    (
+      a.map(r =>
+        '<div class="panel">' +
+          esc(r.note) +
+          '<div class="mini">' +
+            esc(r.visibility || "admin") +
+          '</div>' +
+        '</div>'
+      ).join("")
+
+      ||
+
+      '<div class="empty">لا توجد ملاحظات.</div>'
+    );
+}
+
+
+async function addNote() {
+  const note =
+    prompt("الملاحظة");
+
+  if (!note) return;
+
+  try {
+
+    await api(
+      "/student_notes",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          student_id: current,
+          note: note,
+          visibility: "admin"
+        })
+      }
+    );
+
+    toast("تمت الإضافة");
+
+    const d =
+      await api("/student/" + current);
+
+    currentData = d;
+
+    notesTab(
+      document.getElementById("modalContent")
+    );
+
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+
+function shareTab(c) {
+
+  c.innerHTML =
+    '<div class="sectionhead">' +
+      '<h3>الرابط الخاص بالطالب</h3>' +
+      '<button class="btn primary" onclick="createShare()">' +
+        'إنشاء رابط' +
+      '</button>' +
+    '</div>' +
+
+    '<p class="mini">' +
+      'الرابط للقراءة فقط ولا يتيح تعديل البيانات.' +
+    '</p>' +
+
+    '<div id="shareResult"></div>';
+}
+
+
+async function createShare() {
+  try {
+
+    const r =
+      await fetch(
+        SHARE + "/admin/share",
+        {
+          method: "POST",
+
+          headers: {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            student_id: current
+          })
+        }
+      );
+
+    const d =
+      await r.json();
+
+    if (!r.ok) {
+      throw Error(
+        d.error || "تعذر إنشاء الرابط"
+      );
+    }
+
+    document.getElementById(
+      "shareResult"
+    ).innerHTML =
+
+      '<div class="linkbox">' +
+
+        '<code id="shareUrl">' +
+          esc(d.share_url) +
+        '</code>' +
+
+        '<button class="btn light" onclick="' +
+          "navigator.clipboard.writeText(" +
+          "document.getElementById('shareUrl').textContent" +
+          ");toast('تم نسخ الرابط')" +
+        '">' +
+          'نسخ' +
+        '</button>' +
+
+        '<button class="btn success" onclick="' +
+          "window.open(" +
+          "'https://wa.me/?text='+" +
+          "encodeURIComponent(" +
+          "'هذا رابط ملفك الرقمي: '+" +
+          "document.getElementById('shareUrl').textContent" +
+          ")," +
+          "'_blank'" +
+          ")" +
+        '">' +
+          'واتساب' +
+        '</button>' +
+
+      '</div>';
+
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+
+/* ===============================
+   إدارة إعلانات المركز
+   =============================== */
+
+const ANNOUNCEMENTS =
+  URL_BASE + "/functions/v1/center-announcements";
+
+async function announcementsRequest(path="", opt={}){
+
+  const r = await fetch(
+    ANNOUNCEMENTS + path,
+    {
+      ...opt,
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"Bearer " + token,
+        ...(opt.headers || {})
+      }
+    }
+  );
+
+  const d = await r.json().catch(() => ({}));
+
+  if(!r.ok)
+    throw Error(d.error || "تعذر تنفيذ العملية");
+
+  return d;
+}
+
+async function loadAnnouncements(){
+
+  const el = document.getElementById("announcementAdminList");
+  if(!el) return;
+
+  el.innerHTML = '<div class="empty">جاري تحميل الإعلانات...</div>';
+
+  try{
+
+    const d = await announcementsRequest();
+    const rows = d.data || [];
+
+    el.innerHTML = rows.length
+      ? rows.map(a =>
+          '<div class="panel" style="margin-top:10px">' +
+            '<div class="sectionhead">' +
+              '<div>' +
+                '<h3 style="margin:0">' + esc(a.title) + '</h3>' +
+                '<div class="mini">' +
+                  esc(a.announcement_type || "عام") +
+                  ' • ' + (a.is_published ? "منشور" : "مخفي") +
+                  ' • ' +
+                  esc(a.published_at ? new Date(a.published_at).toLocaleDateString("ar") : "") +
+                '</div>' +
+              '</div>' +
+              '<div style="display:flex;gap:7px;flex-wrap:wrap">' +
+                '<button class="btn light" onclick="editAnnouncement(\'' + a.id + '\')">تعديل</button>' +
+                '<button class="btn danger" onclick="deleteAnnouncement(\'' + a.id + '\')">حذف</button>' +
+              '</div>' +
+            '</div>' +
+            '<div style="white-space:pre-line;margin-top:8px">' + esc(a.body || "") + '</div>' +
+          '</div>'
+        ).join("")
+      : '<div class="empty">لا توجد إعلانات بعد.</div>';
+
+  }catch(e){
+    el.innerHTML = '<div class="empty">' + esc(e.message) + '</div>';
+  }
+}
+
+async function newAnnouncement(){
+
+  const title = prompt("عنوان الإعلان:");
+  if(!title || !title.trim()) return;
+
+  const body = prompt("نص الإعلان:");
+  if(body === null) return;
+
+  const type = prompt("نوع الإعلان:", "عام") || "عام";
+  const published = confirm("هل تريد نشر الإعلان الآن؟");
+
+  try{
+    await announcementsRequest("",{
+      method:"POST",
+      body:JSON.stringify({
+        title:title.trim(),
+        body:body.trim(),
+        announcement_type:type.trim(),
+        is_published:published,
+        published_at:new Date().toISOString()
+      })
+    });
+    toast("تمت إضافة الإعلان");
+    await loadAnnouncements();
+  }catch(e){
+    toast(e.message);
+  }
+}
+
+async function editAnnouncement(id){
+
+  try{
+    const d = await announcementsRequest();
+    const a = (d.data || []).find(x => x.id === id);
+    if(!a) return toast("الإعلان غير موجود");
+
+    const title = prompt("عنوان الإعلان:", a.title || "");
+    if(title === null) return;
+
+    const body = prompt("نص الإعلان:", a.body || "");
+    if(body === null) return;
+
+    const type = prompt("نوع الإعلان:", a.announcement_type || "عام");
+    if(type === null) return;
+
+    const published = confirm(
+      a.is_published
+        ? "اضغط موافق لإبقاء الإعلان منشورًا، أو إلغاء لإخفائه."
+        : "اضغط موافق لنشر الإعلان، أو إلغاء لإبقائه مخفيًا."
+    );
+
+    await announcementsRequest("/" + encodeURIComponent(id),{
+      method:"PATCH",
+      body:JSON.stringify({
+        title:title.trim(),
+        body:body.trim(),
+        announcement_type:type.trim(),
+        is_published:published,
+        published_at:a.published_at || new Date().toISOString()
+      })
+    });
+
+    toast("تم تعديل الإعلان");
+    await loadAnnouncements();
+
+  }catch(e){
+    toast(e.message);
+  }
+}
+
+async function deleteAnnouncement(id){
+
+  if(!confirm("حذف هذا الإعلان نهائيًا؟")) return;
+
+  try{
+    await announcementsRequest("/" + encodeURIComponent(id),{method:"DELETE"});
+    toast("تم حذف الإعلان");
+    await loadAnnouncements();
+  }catch(e){
+    toast(e.message);
+  }
+}
+
+async function loadGroups() {
+  try {
+
+    const d =
+      await api("/track_groups");
+
+    groups =
+      d.data || [];
+
+    renderGroups();
+
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+
+function renderGroups() {
+
+  const el =
+    document.getElementById("groupsGrid");
+
+  if (!el) return;
+
+  el.innerHTML =
+    groups.map(function(g) {
+
+      const members =
+        g.center_track_group_members || [];
+
+      let opts =
+        students
+          .filter(function(s) {
+            return !members.some(function(m) {
+              return m.student_id === s.id;
+            });
+          })
+          .map(function(s) {
+            return (
+              "<option value='" +
+              s.id +
+              "'>" +
+              esc(s.full_name) +
+              "</option>"
+            );
+          })
+          
+      let rows =
+        members.length
+          ? members.map(function(m) {
+
+              return (
+                "<div style='display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #eee'>" +
+
+                  "<span>" +
+                    esc(
+                      m.students &&
+                      m.students.full_name ||
+                      "طالب"
+                    ) +
+                  "</span>" +
+
+                  "<button class='btn danger' " +
+                    "onclick=\"removeFromGroup('" +
+                    g.id +
+                    "','" +
+                    m.student_id +
+                    "')\">" +
+                    "إخراج" +
+                  "</button>" +
+
+                "</div>"
+              );
+
+            }).join("")
+
+          : "<div class='empty'>لا يوجد طلاب.</div>";
+
+      return (
+        "<div class='panel'>" +
+
+          "<div class='sectionhead'>" +
+
+            "<h3>" +
+              esc(g.name) +
+            "</h3>" +
+
+            "<span class='pill'>" +
+              members.length +
+              " طالب" +
+            "</span>" +
+
+          "</div>" +
+
+          "<div style='display:flex;gap:8px;margin-bottom:12px'>" +
+
+            "<select id='add_" +
+              g.id +
+              "' style='flex:1;padding:9px;border:1px solid #d0d5dd;border-radius:9px'>" +
+
+              "<option value=''>" +
+                "اختر طالبًا للإضافة" +
+              "</option>" +
+
+              opts +
+
+            "</select>" +
+
+            "<button class='btn primary' " +
+              "onclick=\"addToGroup('" +
+              g.id +
+              "')\">" +
+              "إضافة" +
+            "</button>" +
+
+          "</div>" +
+
+          rows +
+
+        "</div>"
+      );
+    }).join("");
+}
+
+async function addToGroup(gid) {
+  const sid =
+    document.getElementById("add_" + gid).value;
+
+  if (!sid) return;
+
+  try {
+
+    await api(
+      "/track_group_members",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          group_id: gid,
+          student_id: sid
+        })
+      }
+    );
+
+    toast("تمت إضافة الطالب إلى المجموعة");
+
+    await loadGroups();
+
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+
+async function removeFromGroup(gid, sid) {
+
+  if (
+    !confirm(
+      "إخراج هذا الطالب من المجموعة؟"
+    )
+  ) {
+    return;
+  }
+
+  try {
+
+    await api(
+      "/track_group_members?group_id=" +
+      encodeURIComponent(gid) +
+      "&student_id=" +
+      encodeURIComponent(sid),
+      {
+        method: "DELETE"
+      }
+    );
+
+    toast("تم إخراج الطالب");
+
+    await loadGroups();
+
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+
+async function newStudent() {
+
+  const full_name =
+    prompt("اسم الطالب الكامل:");
+
+  if (
+    !full_name ||
+    !full_name.trim()
+  ) {
+    return;
+  }
+
+  const student_code =
+    prompt(
+      "رقم الملف (اختياري):",
+      ""
+    ) || null;
+
+  const phone =
+    prompt(
+      "رقم الهاتف (اختياري):",
+      ""
+    ) || null;
+
+  const country =
+    prompt(
+      "الدولة (اختياري):",
+      ""
+    ) || null;
+
+  try {
+
+    const d =
+      await api(
+        "/student",
+        {
+          method: "POST",
+
+          body: JSON.stringify({
+            full_name:
+              full_name.trim(),
+
+            student_code:
+              student_code,
+
+            phone:
+              phone,
+
+            country:
+              country,
+
+            selected_tracks: []
+          })
+        }
+      );
+
+    toast(
+      "تم إنشاء الطالب بنجاح"
+    );
+
+    await loadAll();
+
+    openStudent(
+      d.data.id
+    );
+
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+
+async function deleteStudent() {
+
+  if (!current) {
+    return;
+  }
+
+  const name =
+    currentData?.data?.full_name ||
+    "هذا الطالب";
+
+  if (
+    !confirm(
+      "هل أنت متأكد من حذف " +
+      name +
+      "؟\n" +
+      "سيتم حذف ملف الطالب وسجلاته المرتبطة أيضًا."
+    )
+  ) {
+    return;
+  }
+
+  const typed =
+    prompt(
+      "اكتب حذف للتأكيد:"
+    );
+
+  if (typed !== "حذف") {
+    return;
+  }
+
+  try {
+
+    await api(
+      "/student/" + current,
+      {
+        method: "DELETE"
+      }
+    );
+
+    closeModal();
+
+    current = null;
+    currentData = null;
+
+    toast(
+      "تم حذف الطالب"
+    );
+
+    await loadAll();
+
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+
+function toast(s) {
+
+  const x =
+    document.getElementById(
+      "toast"
+    );
+
+  x.textContent = s;
+
+  x.style.display =
+    "block";
+
+  setTimeout(
+    () => {
+      x.style.display =
+        "none";
+    },
+    2600
+  );
+}
+
+
+document.getElementById(
+  "logout"
+).onclick = () => {
+
+  localStorage.removeItem(
+    "center_admin_token"
+  );
+
+  location.reload();
+};
+
+
+token =
+  localStorage.getItem(
+    "center_admin_token"
+  ) || "";
+
+if (token) {
+  start();
+}
+
+</script>
+
+</body>
+</html>
