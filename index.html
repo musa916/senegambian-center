@@ -1379,6 +1379,126 @@ m => ({
 
 }
 
+async function loadAnnouncements(){
+
+  const el =
+    document.getElementById("announcementList");
+
+  if(!el) return;
+
+  el.innerHTML =
+    '<div class="empty">جاري تحميل الإعلانات...</div>';
+
+  try{
+
+    const r =
+      await fetch(
+        ANNOUNCEMENTS_URL +
+        "?t=" +
+        Date.now(),
+        {
+          method:"GET",
+          headers:{
+            "Accept":"application/json"
+          },
+          cache:"no-store"
+        }
+      );
+
+    const d =
+      await r.json().catch(() => null);
+
+    if(
+      !r.ok ||
+      !d ||
+      !Array.isArray(d.data)
+    ){
+
+      throw new Error(
+        d?.error ||
+        "تعذر تحميل الإعلانات."
+      );
+
+    }
+
+    const rows =
+      d.data || [];
+
+    if(!rows.length){
+
+      el.innerHTML =
+        '<div class="empty">' +
+        'لا توجد إعلانات منشورة حاليًا.' +
+        '</div>';
+
+      return;
+    }
+
+    el.innerHTML =
+      rows.map(a => {
+
+        const image =
+          a.image_url
+            ? '<img src="' +
+              esc(a.image_url) +
+              '" alt="صورة الإعلان" ' +
+              'style="display:block;width:100%;' +
+              'max-height:360px;object-fit:cover;' +
+              'border-radius:12px;margin-bottom:12px;">'
+            : "";
+
+        const date =
+          a.published_at
+            ? new Date(
+                a.published_at
+              ).toLocaleDateString(
+                "ar"
+              )
+            : "";
+
+        return (
+
+          '<article class="announcement">' +
+
+            image +
+
+            '<div class="meta">' +
+              esc(
+                a.announcement_type ||
+                "عام"
+              ) +
+              (date
+                ? " • " + esc(date)
+                : "") +
+            '</div>' +
+
+            '<h3>' +
+              esc(a.title || "") +
+            '</h3>' +
+
+            '<p>' +
+              esc(a.body || "") +
+            '</p>' +
+
+          '</article>'
+
+        );
+
+      }).join("");
+
+  }catch(e){
+
+    el.innerHTML =
+      '<div class="empty">' +
+      esc(
+        e.message ||
+        "تعذر تحميل الإعلانات."
+      ) +
+      '</div>';
+
+  }
+
+}
 
 function openStudentFile(){
 
@@ -1446,7 +1566,7 @@ function openStudentFile(){
     fetch(api, {
       method: "GET",
       headers: {
-        "Accept": "application/json"
+         "Accept": "application/json"
       },
       cache: "no-store"
     })
@@ -1503,3 +1623,4 @@ loadAnnouncements();
 
 </body>
 </html>  
+
