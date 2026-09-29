@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>إدارة ملف الطالب | مركز الشاعر السنغامبي</title>
+<style>
+:root{--ink:#17213b;--muted:#667085;--bg:#f4f6fa;--card:#fff;--line:#e5e7eb;--ok:#087443;--danger:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Tahoma,Arial,sans-serif;color:#182230}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.top{background:linear-gradient(135deg,#17213b,#263a69);color:#fff;padding:18px 24px;position:sticky;top:0;z-index:20}
+.topin{max-width:1400px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand h1{font-size:20px;margin:0}.brand p{margin:5px 0 0;opacity:.75;font-size:12px}
+.top button{background:#fff1;border:1px solid #ffffff44;color:#fff;border-radius:10px;padding:9px 13px}
+.wrap{max-width:1400px;margin:22px auto;padding:0 16px}.login{max-width:440px;margin:70px auto;background:#fff;padding:28px;border-radius:20px;box-shadow:0 10px 35px #0001}
+.login h2{text-align:center;margin-top:0}.field{margin:10px 0}.field label{display:block;font-weight:700;font-size:12px;margin-bottom:6px}
+.login input,.field input,.field select,.field textarea{display:block;width:100%;padding:11px;border:1px solid #ccd2da;border-radius:9px;background:#fff}
+.field textarea{min-height:95px;resize:vertical}.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:700}.primary{background:var(--ink);color:#fff}.light{background:#eef2f7;color:#17213b}.danger{background:#fee4e2;color:var(--danger)}.success{background:#dcfae6;color:var(--ok)}
+.hidden{display:none!important}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}.stat b{font-size:25px;display:block}.stat span,.mini{font-size:12px;color:var(--muted)}
+.toolbar{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin:18px 0;display:flex;gap:10px;flex-wrap:wrap}.toolbar input{flex:1;min-width:220px;padding:11px;border:1px solid #d0d5dd;border-radius:10px}
+.tablewrap{overflow:auto;background:#fff;border:1px solid var(--line);border-radius:16px}.table{width:100%;border-collapse:collapse;min-width:760px}.table th,.table td{padding:12px;border-bottom:1px solid var(--line);text-align:right;font-size:13px}.table th{background:#f8fafc}
+.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:18px}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.pill{display:inline-block;padding:4px 8px;border-radius:999px;background:#eef2ff;font-size:11px}.empty{text-align:center;padding:35px;color:var(--muted)}
+.modal{position:fixed;inset:0;background:#0008;z-index:50;overflow:auto;padding:20px}.modalbox{max-width:1100px;margin:20px auto;background:#fff;border-radius:20px;padding:20px}
+.modalhead{display:flex;justify-content:space-between;align-items:center;gap:10px}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}.tab{padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:#fff}.tab.active{background:var(--ink);color:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.photoBox{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:12px;background:#f8fafc;border:1px solid var(--line);border-radius:12px}
+.photoBox img{width:90px;height:90px;object-fit:cover;border-radius:14px;background:#eef2f7;border:1px solid var(--line)}.trackChoices{display:grid;gap:8px}.trackChoiceRow{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fafbfc}.trackChoiceRow input{margin-left:8px}
+.toast{position:fixed;bottom:18px;left:18px;background:#17213b;color:#fff;padding:12px 16px;border-radius:12px;display:none;z-index:99;max-width:90vw}
+.linkbox{display:flex;gap:8px;align-items:center;background:#f8fafc;border:1px solid var(--line);padding:10px;border-radius:10px;margin:8px 0}.linkbox code{direction:ltr;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+@media(max-width:800px){.stats{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.topin{align-items:flex-start}.brand h1{font-size:16px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin"><div class="brand"><h1>مركز الشاعر السنغامبي للغة والشعر</h1><p>لوحة إدارة الملفات الرقمية للطلاب</p></div><button id="logout" class="hidden">تسجيل الخروج</button></div></header>
+
+<main class="wrap">
+<section id="login" class="login">
+<h2>دخول الإدارة</h2><p class="mini">استخدم حساب الإدارة المصرح له في Supabase.</p>
+<div class="field"><label>البريد الإلكتروني</label><input id="email" type="email" autocomplete="username"></div>
+<div class="field"><label>كلمة المرور</label><input id="password" type="password" autocomplete="current-password"></div>
+<button class="btn primary" style="width:100%" onclick="login()">دخول</button><p id="loginErr" style="color:#b42318"></p>
+</section>
+
+<section id="app" class="hidden">
+<div class="stats">
+<div class="stat"><b id="sStudents">0</b><span>إجمالي الطلاب</span></div>
+<div class="stat"><b id="sActive">0</b><span>الطلاب النشطون</span></div>
+<div class="stat"><b id="sAttend">0</b><span>سجلات الحضور</span></div>
+<div class="stat"><b id="sAch">0</b><span>الإنجازات</span></div>
+</div>
+<div class="toolbar">
+<input id="search" placeholder="ابحث باسم الطالب أو رقم الملف أو الهاتف..." oninput="renderStudents()">
+<select id="levelFilter" onchange="renderStudents()"><option value="">جميع الطلاب</option></select>
+<button class="btn primary" onclick="newStudent()">＋ طالب جديد</button>
+<button class="btn light" onclick="loadAll()">↻ تحديث</button>
+</div>
+<div class="tablewrap"><table class="table"><thead><tr><th>الطالب</th><th>رقم الملف</th><th>المستوى</th><th>المسارات</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody id="studentsBody"></tbody></table></div>
+<section class="panel"><div class="sectionhead"><div><h3>مجموعات المسارات</h3><div class="mini">تُحدّث عضوية الطالب تلقائيًا عند حفظ المسارات.</div></div><button class="btn light" onclick="loadGroups()">↻ تحديث</button></div><div id="groupsGrid"></div></section>
+<section class="panel"><div class="sectionhead"><div><h3>إدارة إعلانات المركز</h3><div class="mini">إضافة الإعلانات وتعديلها ونشرها أو إخفاؤها.</div></div><div style="display:flex;gap:8px"><button class="btn primary" onclick="newAnnouncement()">＋ إعلان جديد</button><button class="btn light" onclick="loadAnnouncements()">↻ تحديث</button></div></div><div id="announcementAdminList"></div></section>
+</section>
+</main>
+
+<div id="modal" class="modal hidden"><div class="modalbox">
+<div class="modalhead"><div><h2 id="mTitle" style="margin:0"></h2><div id="mCode" class="mini"></div></div>
+<div style="display:flex;gap:8px"><button class="btn danger" onclick="deleteStudent()">حذف الطالب</button><button class="btn light" onclick="closeModal()">إغلاق</button></div></div>
+<div class="tabs">
+<button class="tab active" onclick="tab('profile',this)">البيانات</button>
+<button class="tab" onclick="tab('assessment',this)">تقييم المواد</button>
+<button class="tab" onclick="tab('results',this)">النتائج</button>
+<button class="tab" onclick="tab('attendance',this)">الحضور</button>
+<button class="tab" onclick="tab('achievements',this)">الإنجازات</button>
+<button class="tab" onclick="tab('progress',this)">التقدم</button>
+<button class="tab" onclick="tab('notes',this)">الملاحظات</button>
+<button class="tab" onclick="tab('share',this)">رابط الطالب</button>
+</div>
+<div id="modalContent"></div>
+</div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const URL_BASE="https://marxsmnibmfjpvpwscvo.supabase.co";
+const KEY="sb_publishable_6xBkdRNXh1nTMuDVTywW2g_xGQeAilm";
+const API=URL_BASE+"/functions/v1/center-admin-api-v3";
+const SHARE=URL_BASE+"/functions/v1/student-share";
+let token="",students=[],levels=[],groups=[],current=null,currentData=null;
+
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+const api=async(path,opt={})=>{
+ const r=await fetch(API+path,{...opt,headers:{"Content-Type":"application/json","Authorization":"Bearer "+token,...(opt.headers||{})}});
+ const d=await r.json().catch(()=>({}));
+ if(!r.ok)throw Error(d.error||"حدث خطأ");
+ return d;
+};
+
+async function login(){
+ const email=document.getElementById("email").value.trim(),password=document.getElementById("password").value;
+ try{
+  const r=await fetch(URL_BASE+"/auth/v1/token?grant_type=password",{method:"POST",headers:{"apikey":KEY,"Content-Type":"application/json"},body:JSON.stringify({email,password})});
+  const d=await r.json();
+  if(!r.ok)throw Error(d.error_description||d.msg||"بيانات الدخول غير صحيحة");
+  token=d.access_token;localStorage.center_admin_token=token;await start();
+ }catch(e){document.getElementById("loginErr").textContent=e.message}
+}
+async function start(){
+ try{
+  await api("/me");
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+  document.getElementById("logout").classList.remove("hidden");
+  await loadAll();
+ }catch(e){localStorage.removeItem("center_admin_token");token="";document.getElementById("loginErr").textContent=e.message}
+}
+async function loadAll(){
+ try{
+  const d=await api("/dashboard");
+  sStudents.textContent=d.students||0;sAttend.textContent=d.attendance_records||0;sAch.textContent=d.achievements||0;
+  const l=await api("/levels");levels=l.data||[];
+  levelFilter.innerHTML='<option value="">جميع الطلاب</option>'+levels.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.name_ar)+'</option>').join("");
+  const st=await api("/students");students=st.data||[];
+  sActive.textContent=students.filter(x=>x.is_active).length;
+  renderStudents();await loadGroups();await loadAnnouncements();
+ }catch(e){toast(e.message)}
+}
+function renderStudents(){
+ const q=search.value.trim().toLowerCase(),lf=levelFilter.value;
+ const a=students.filter(x=>(!lf||x.level_id===lf)&&(!q||[x.full_name,x.student_code,x.phone,x.country].join(" ").toLowerCase().includes(q)));
+ studentsBody.innerHTML=a.length?a.map(x=>'<tr><td><b>'+esc(x.full_name)+'</b><div class="mini">'+esc(x.phone||"")+'</div></td><td>'+esc(x.student_code||"—")+'</td><td>'+esc(x.level_name||"—")+'</td><td>'+esc((x.selected_tracks||[]).join("، ")||"—")+'</td><td><span class="pill">'+(x.is_active?"نشط":"غير نشط")+'</span></td><td><button class="btn primary" onclick="openStudent(\''+x.id+'\')">فتح الملف</button></td></tr>').join(""):'<tr><td colspan="6" class="empty">لا يوجد طلاب مطابقون للبحث.</td></tr>';
+}
+async function openStudent(id){
+ try{
+  current=id;currentData=await api("/student/"+encodeURIComponent(id));
+  mTitle.textContent=currentData.data.full_name||"ملف الطالب";mCode.textContent="رقم الملف: "+(currentData.data.student_code||"—");
+  modal.classList.remove("hidden");tab("profile",document.querySelector(".tab"));
+ }catch(e){toast(e.message)}
+}
+function closeModal(){modal.classList.add("hidden")}
+function tab(name,btn){
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");
+ const c=modalContent;
+ ({profile:profileTab,assessment:assessmentTab,results:resultsTab,attendance:attendanceTab,achievements:achTab,progress:progressTab,notes:notesTab,share:shareTab}[name]||profileTab)(c);
+}
+
+const trackNames={nahw:"النحو والصرف والبلاغة",khatt:"الخط والإملاء ومهارة التحدث والإلقاء",arood:"العروض والشعر والنقد والكتابة الإبداعية"};
+const subjectMap={nahw:["النحو","الصرف","البلاغة"],khatt:["الخط","الإملاء","مهارة التحدث والإلقاء"],arood:["العروض","الشعر","النقد","الكتابة الإبداعية"]};
+
+function field(k,l,v,t="input"){
+ if(t==="select")return '<div class="field"><label>'+esc(l)+'</label><select id="f_'+k+'">'+levels.map(z=>'<option value="'+esc(z.id)+'" '+(z.id===v?"selected":"")+'>'+esc(z.name_ar)+'</option>').join("")+'</select></div>';
+ if(t==="textarea")return '<div class="field"><label>'+esc(l)+'</label><textarea id="f_'+k+'">'+esc(v??"")+'</textarea></div>';
+ return '<div class="field"><label>'+esc(l)+'</label><input id="f_'+k+'" type="text" value="'+esc(v??"")+'"></div>';
+}
+function tracksField(tracks){
+ return '<div class="field" style="grid-column:1/-1"><label>المسارات (يمكن اختيار مسارين)</label><div class="trackChoices">'+Object.entries(trackNames).map(([k,n])=>'<label class="trackChoiceRow"><input class="trackChoice" type="checkbox" value="'+esc(n)+'" '+(tracks.includes(n)?"checked":"")+'>'+esc(n)+'</label>').join("")+'</div></div>';
+}
+function profileTab(c){
+ const x=currentData.data||{},tracks=x.selected_tracks||[];
+ c.innerHTML='<div class="grid2">'+field("full_name","الاسم الكامل",x.full_name)+field("student_code","رقم الملف",x.student_code)+field("email","البريد الإلكتروني",x.email)+field("phone","الهاتف",x.phone)+field("country","الدولة",x.country)+field("city","المدينة",x.city)+field("prior_education","التعليم السابق",x.prior_education)+field("primary_track","المسار الأساسي",x.primary_track)+tracksField(tracks)+field("level_id","المستوى",x.level_id,"select")+field("gender","الجنس",x.gender)+field("application_reason","سبب التسجيل",x.application_reason,"textarea")+field("center_reason","سبب اختيار المركز",x.center_reason,"textarea")+field("admin_notes","ملاحظات الإدارة",x.admin_notes,"textarea")+
+ '<div class="field" style="grid-column:1/-1"><label>صورة الطالب</label><div class="photoBox">'+(x.photo_url?'<img src="'+esc(x.photo_url)+'" onerror="this.style.display=\'none\'">':"")+'<div><input id="studentPhotoFile" type="file" accept="image/jpeg,image/png,image/webp"><div class="mini">JPG أو PNG أو WebP — بحد أقصى 5MB.</div><button class="btn light" style="margin-top:8px" onclick="uploadStudentPhoto()">رفع الصورة وحفظها</button>'+(x.photo_url?'<button class="btn danger" style="margin-top:8px;margin-right:8px" onclick="deleteStudentPhoto()">حذف الصورة</button>':"")+'</div></div></div>'+
+ '<div class="field" style="grid-column:1/-1"><label>شهادة الطالب</label><div class="photoBox"><div style="width:100%">'+(x.certificate_url?'<div class="mini">تم رفع الشهادة.</div><button class="btn success" onclick="window.open(\''+esc(x.certificate_url)+'\',\'_blank\')">عرض الشهادة</button><button class="btn danger" style="margin-right:8px" onclick="deleteStudentCertificate()">حذف الشهادة</button>':'<div class="mini">لم تُرفع شهادة بعد.</div>')+'</div><div style="width:100%"><input id="studentCertificateFile" type="file" accept="application/pdf,image/jpeg,image/png"><div class="mini">PDF أو JPG أو PNG — بحد أقصى 10MB.</div><button class="btn light" style="margin-top:8px" onclick="uploadStudentCertificate()">رفع الشهادة وحفظها</button></div></div></div>'+
+ '</div><button class="btn primary" style="margin-top:14px" onclick="saveProfile()">حفظ التغييرات</button>';
+}
+async function saveProfile(){
+ const b={};
+ ["full_name","student_code","email","phone","country","city","prior_education","primary_track","application_reason","center_reason","admin_notes","gender"].forEach(k=>{const el=document.getElementById("f_"+k);if(el)b[k]=el.value});
+ b.selected_tracks=[...document.querySelectorAll(".trackChoice:checked")].map(x=>x.value);
+ if(b.selected_tracks.length>2)return toast("يمكن اختيار مسارين فقط.");
+ const levelEl=document.getElementById("f_level_id");b.level_id=levelEl?levelEl.value:null;
+ try{
+  const d=await api("/student/"+encodeURIComponent(current),{method:"PATCH",body:JSON.stringify(b)});
+  if(!d.data)throw Error("لم يتم حفظ بيانات الطالب.");
+  currentData.data=d.data;
+  for(const g of groups){
+   const wanted=b.selected_tracks.includes(g.name),member=(g.center_track_group_members||[]).some(m=>m.student_id===current);
+   if(wanted&&!member)await api("/track_group_members",{method:"POST",body:JSON.stringify({group_id:g.id,student_id:current})});
+   if(!wanted&&member)await api("/track_group_members?group_id="+encodeURIComponent(g.id)+"&student_id="+encodeURIComponent(current),{method:"DELETE"});
+  }
+  await loadGroups();await loadAllStudentsOnly();toast("تم حفظ جميع بيانات الطالب بنجاح.");profileTab(modalContent);
+ }catch(e){toast(e.message||"تعذر الحفظ")}
+}
+async function loadAllStudentsOnly(){const st=await api("/students");students=st.data||[];sActive.textContent=students.filter(x=>x.is_active).length;renderStudents()}
+async function uploadStudentPhoto(){
+ const f=studentPhotoFile?.files?.[0];if(!f)return toast("اختر صورة أولًا");if(f.size>5*1024*1024)return toast("حجم الصورة أكبر من 5MB");if(!["image/jpeg","image/png","image/webp"].includes(f.type))return toast("صيغة الصورة غير مدعومة");
+ try{const form=new FormData();form.append("file",f);const r=await fetch(API+"/student/"+current+"/photo",{method:"POST",headers:{Authorization:"Bearer "+token,apikey:KEY},body:form});const d=await r.json();if(!r.ok||!d.success)throw Error(d.error||"تعذر رفع الصورة");currentData.data.photo_url=d.photo_url;toast("تم رفع الصورة وحفظها");profileTab(modalContent)}catch(e){toast(e.message)}
+}
+async function deleteStudentPhoto(){
+ if(!confirm("حذف صورة الطالب نهائيًا؟"))return;
+ try{const r=await fetch(API+"/student/"+current+"/photo",{method:"DELETE",headers:{Authorization:"Bearer "+token,apikey:KEY}});const d=await r.json();if(!r.ok||!d.success)throw Error(d.error||"تعذر حذف الصورة");currentData.data.photo_url=null;toast("تم حذف الصورة");profileTab(modalContent)}catch(e){toast(e.message)}
+}
+async function uploadStudentCertificate(){
+ const f=studentCertificateFile?.files?.[0];if(!f)return toast("اختر الشهادة أولًا");if(f.size>10*1024*1024)return toast("حجم الشهادة أكبر من 10MB");if(!["application/pdf","image/jpeg","image/png"].includes(f.type))return toast("صيغة الشهادة غير مدعومة");
+ try{const form=new FormData();form.append("file",f);const r=await fetch(API+"/student/"+current+"/certificate",{method:"POST",headers:{Authorization:"Bearer "+token,apikey:KEY},body:form});const d=await r.json();if(!r.ok||!d.success)throw Error(d.error||"تعذر رفع الشهادة");currentData.data.certificate_url=d.certificate_url;toast("تم رفع الشهادة وحفظها");profileTab(modalContent)}catch(e){toast(e.message)}
+}
+async function deleteStudentCertificate(){
+ if(!confirm("حذف الشهادة نهائيًا؟"))return;
+ try{const r=await fetch(API+"/student/"+current+"/certificate",{method:"DELETE",headers:{Authorization:"Bearer "+token,apikey:KEY}});const d=await r.json();if(!r.ok||!d.success)throw Error(d.error||"تعذر حذف الشهادة");currentData.data.certificate_url=null;toast("تم حذف الشهادة");profileTab(modalContent)}catch(e){toast(e.message)}
+}
+
+function selectedTrackCodes(){const t=currentData.data.selected_tracks||[];return Object.keys(trackNames).filter(k=>t.includes(trackNames[k]))}
+function assessmentRecord(code,subject){return(currentData.progress||[]).find(r=>r.track_code===code&&r.subject_name===subject)||{}}
+function pct(v,total){if(v===""||v==null)return null;const n=Number(v),t=Number(total)||100;return Number.isFinite(n)&&t>0?Math.round(n/t*10000)/100:null}
+function assessmentTab(c){
+ const codes=selectedTrackCodes();
+ c.innerHTML='<div class="panel"><h3>التقييم التفصيلي للمواد</h3><p class="mini">تُحفظ درجات الاختبار والواجب والإنجاز والملاحظات لكل مادة. جميع الحقول تُحمّل بالقيم الحالية قبل التعديل.</p></div>'+(codes.length?codes.map(code=>'<div class="panel"><h3>مسار '+esc(trackNames[code])+'</h3>'+subjectMap[code].map(subjectCard.bind(null,code)).join("")+'</div>').join(""):'<div class="empty">لم يُحدد للطالب أي مسار.</div>');
+}
+function subjectCard(code,subject){
+ const r=assessmentRecord(code,subject),id=code+"_"+encodeURIComponent(subject);
+ return '<div class="panel" style="background:#fbfcfe"><h3>'+esc(subject)+'</h3><div class="grid2">'+
+ fieldNum("test_"+id,"درجة الاختبار",r.test_score)+fieldNum("testtotal_"+id,"من",r.test_total??100)+
+ fieldNum("assign_"+id,"درجة الواجب",r.assignment_score)+fieldNum("assigntotal_"+id,"من",r.assignment_total??100)+
+ fieldNum("achscore_"+id,"درجة الإنجاز",r.achievement_score)+fieldNum("achtotal_"+id,"من",r.achievement_total??100)+
+ field("strength_"+id,"نقاط القوة",r.strengths,"textarea")+field("improve_"+id,"جوانب التحسين",r.improvement,"textarea")+field("teacher_"+id,"ملاحظة المعلم",r.teacher_note,"textarea")+field("admin_"+id,"ملاحظة الإدارة",r.admin_note,"textarea")+
+ '</div><div style="margin-top:10px"><button class="btn primary" onclick="saveAssessment(\''+code+'\',\''+encodeURIComponent(subject)+'\')">حفظ تقييم المادة</button></div></div>';
+}
+function fieldNum(id,l,v){return '<div class="field"><label>'+esc(l)+'</label><input id="'+id+'" type="number" min="0" step="0.01" value="'+esc(v??"")+'"></div>'}
+async function saveAssessment(code,subjectEncoded){
+ const subject=decodeURIComponent(subjectEncoded),id=code+"_"+subjectEncoded,r=assessmentRecord(code,subject);
+ const body={student_id:current,level_id:currentData.data.level_id||null,track_code:code,subject_name:subject,
+ test_score:val("test_"+id),test_total:val("testtotal_"+id)||100,assignment_score:val("assign_"+id),assignment_total:val("assigntotal_"+id)||100,
+ achievement_score:val("achscore_"+id),achievement_total:val("achtotal_"+id)||100,strengths:val("strength_"+id),weaknesses:val("improve_"+id),teacher_note:val("teacher_"+id),admin_note:val("admin_"+id)};
+ try{if(r.id)await api("/student_progress/"+r.id,{method:"PATCH",body:JSON.stringify(body)});else await api("/student_progress",{method:"POST",body:JSON.stringify(body)});currentData=await api("/student/"+current);toast("تم حفظ تقييم "+subject);assessmentTab(modalContent)}catch(e){toast(e.message)}
+}
+function val(id){const e=document.getElementById(id);return e?e.value.trim():""}
+
+function resultsTab(c){
+ const a=(currentData.progress||[]).filter(r=>r.track_code==="result"||r.result_score!=null);
+ c.innerHTML='<div class="sectionhead"><h3>النتائج</h3><button class="btn primary" onclick="addResult()">＋ إضافة/تعديل النتيجة العامة</button></div>'+(a.length?a.map(r=>'<div class="panel"><b>'+esc(r.subject_name||"النتيجة العامة")+'</b><div>النتيجة: '+esc(r.result_score??"—")+'%</div><div class="mini">'+esc(r.grade||"")+(r.status?" • "+esc(r.status):"")+'</div></div>').join(""):'<div class="empty">لا توجد نتائج.</div>');
+}
+async function addResult(){
+ const scoreText=prompt("الدرجة:", "0");if(scoreText===null)return;const totalText=prompt("الدرجة الكلية:","100");if(totalText===null)return;
+ const score=Number(scoreText),total=Number(totalText);if(!Number.isFinite(score)||!Number.isFinite(total)||total<=0||score<0||score>total)return toast("أدخل درجة صحيحة.");
+ const p=Math.round(score/total*10000)/100,grade=p>=90?"ممتاز":p>=80?"جيد جدًا":p>=70?"جيد":p>=60?"مقبول":"غير مجتاز";
+ const body={student_id:current,level_id:currentData.data.level_id||null,track_code:"result",subject_name:"النتيجة العامة",status:p>=60?"passed":"failed",result_score:p,grade};
+ try{const old=(currentData.progress||[]).find(r=>r.track_code==="result"&&r.subject_name==="النتيجة العامة");if(old)await api("/student_progress/"+old.id,{method:"PATCH",body:JSON.stringify(body)});else await api("/student_progress",{method:"POST",body:JSON.stringify(body)});currentData=await api("/student/"+current);toast("تم حفظ النتيجة");resultsTab(modalContent)}catch(e){toast(e.message)}
+}
+
+function attendanceTab(c){
+ const a=currentData.attendance||[];
+ c.innerHTML='<div class="sectionhead"><h3>الحضور</h3><button class="btn primary" onclick="addAttendance()">＋ تسجيل</button></div><div class="tablewrap"><table class="table"><tr><th>التاريخ</th><th>المسار</th><th>الحالة</th><th>التأخر</th><th>ملاحظة</th></tr>'+(a.map(r=>'<tr><td>'+esc(r.session_date)+'</td><td>'+esc(r.track_code||"")+'</td><td>'+esc(r.status)+'</td><td>'+esc(r.minutes_late||0)+'</td><td>'+esc(r.note||"")+'</td></tr>').join("")||'<tr><td colspan="5" class="empty">لا توجد سجلات.</td></tr>')+'</table></div>';
+}
+async function addAttendance(){
+ const date=prompt("تاريخ الجلسة YYYY-MM-DD",new Date().toISOString().slice(0,10));if(!date)return;
+ const status=prompt("present / absent / late / excused","present");if(!status)return;const track=prompt("رمز المسار","")||null;const late=prompt("دقائق التأخر","0");
+ try{await api("/attendance_records",{method:"POST",body:JSON.stringify({student_id:current,session_date:date,status,track_code:track,minutes_late:Number(late)||0})});currentData=await api("/student/"+current);toast("تم تسجيل الحضور");attendanceTab(modalContent)}catch(e){toast(e.message)}
+}
+function achTab(c){
+ const a=currentData.achievements||[];
+ c.innerHTML='<div class="sectionhead"><h3>الإنجازات</h3><button class="btn primary" onclick="addAch()">＋ إضافة</button></div>'+(a.map(r=>'<div class="panel"><b>'+esc(r.title)+'</b><div>'+esc(r.description||"")+'</div><div class="mini">'+esc(r.achievement_type||"")+' • '+esc(r.achieved_on||"")+'</div></div>').join("")||'<div class="empty">لا توجد إنجازات.</div>');
+}
+async function addAch(){
+ const title=prompt("عنوان الإنجاز:");if(!title)return;const description=prompt("الوصف:","")??"";
+ try{await api("/student_achievements",{method:"POST",body:JSON.stringify({student_id:current,title,description,achievement_type:"إنجاز"})});currentData=await api("/student/"+current);toast("تمت إضافة الإنجاز");achTab(modalContent)}catch(e){toast(e.message)}
+}
+function progressTab(c){
+ const a=currentData.progress||[];
+ c.innerHTML='<h3>التقدم</h3>'+(a.map(r=>'<div class="panel"><b>'+esc(r.levels?.name_ar||"")+'</b><div>المسار: '+esc(r.track_code||"—")+'</div><div>المادة: '+esc(r.subject_name||"—")+'</div><div>النتيجة: '+esc(r.result_score??"—")+' • '+esc(r.grade||"—")+'</div></div>').join("")||'<div class="empty">لا توجد بيانات.</div>');
+}
+function notesTab(c){
+ const a=currentData.notes||[];
+ c.innerHTML='<div class="sectionhead"><h3>ملاحظات الإدارة</h3><button class="btn primary" onclick="addNote()">＋ إضافة</button></div>'+(a.map(r=>'<div class="panel">'+esc(r.note)+'<div class="mini">'+esc(r.visibility||"admin")+'</div></div>').join("")||'<div class="empty">لا توجد ملاحظات.</div>');
+}
+async function addNote(){
+ const note=prompt("الملاحظة:");if(!note)return;
+ try{await api("/student_notes",{method:"POST",body:JSON.stringify({student_id:current,note,visibility:"admin"})});currentData=await api("/student/"+current);toast("تمت إضافة الملاحظة");notesTab(modalContent)}catch(e){toast(e.message)}
+}
+function shareTab(c){
+ c.innerHTML='<div class="sectionhead"><h3>الرابط الخاص بالطالب</h3><button class="btn primary" onclick="createShare()">إنشاء رابط</button></div><p class="mini">الرابط للقراءة فقط ولا يتيح تعديل البيانات.</p><div id="shareResult"></div>';
+}
+async function createShare(){
+ try{const r=await fetch(SHARE+"/admin/share",{method:"POST",headers:{Authorization:"Bearer "+token,"Content-Type":"application/json"},body:JSON.stringify({student_id:current})});const d=await r.json();if(!r.ok)throw Error(d.error||"تعذر إنشاء الرابط");shareResult.innerHTML='<div class="linkbox"><code id="shareUrl">'+esc(d.share_url)+'</code><button class="btn light" onclick="copyShareUrl()">نسخ</button><button class="btn success" onclick="openWhatsApp()">واتساب</button></div>'}catch(e){toast(e.message)}
+}
+
+
+function copyShareUrl(){const e=document.getElementById('shareUrl');if(!e)return;navigator.clipboard.writeText(e.textContent).then(()=>toast('تم نسخ الرابط')).catch(()=>toast('تعذر النسخ تلقائيًا'));}
+function openWhatsApp(){const e=document.getElementById('shareUrl');if(!e)return;window.open('https://wa.me/?text='+encodeURIComponent('هذا رابط ملفك الرقمي: '+e.textContent),'_blank');}
+
+async function loadGroups(){
+ try{const d=await api("/track_groups");groups=d.data||[];renderGroups()}catch(e){toast(e.message)}
+}
+function renderGroups(){
+ groupsGrid.innerHTML=groups.map(g=>{const members=g.center_track_group_members||[];const opts=students.filter(s=>!members.some(m=>m.student_id===s.id)).map(s=>'<option value="'+esc(s.id)+'">'+esc(s.full_name)+'</option>').join("");const rows=members.map(m=>'<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #eee"><span>'+esc((students.find(s=>s.id===m.student_id)||{}).full_name||'طالب')+'</span><button class="btn danger" onclick="removeFromGroup(\''+g.id+'\',\''+m.student_id+'\')">إخراج</button></div>').join('');return '<div class="panel"><div class="sectionhead"><h3>'+esc(g.name)+'</h3><span class="pill">'+members.length+' طالب</span></div><div style="display:flex;gap:8px"><select id="add_'+g.id+'" style="flex:1;padding:9px;border:1px solid #d0d5dd;border-radius:9px"><option value="">اختر طالبًا</option>'+opts+'</select><button class="btn primary" onclick="addToGroup(\''+g.id+'\')">إضافة</button></div></div>'}).join("")||'<div class="empty">لا توجد مجموعات.</div>';
+}
+async function addToGroup(gid){const sid=document.getElementById("add_"+gid).value;if(!sid)return;try{await api("/track_group_members",{method:"POST",body:JSON.stringify({group_id:gid,student_id:sid})});toast("تمت الإضافة");loadGroups()}catch(e){toast(e.message)}}
+
+async function removeFromGroup(gid,sid){
+ if(!confirm("إخراج هذا الطالب من المجموعة؟"))return;
+ try{await api("/track_group_members?group_id="+encodeURIComponent(gid)+"&student_id="+encodeURIComponent(sid),{method:"DELETE"});toast("تم إخراج الطالب");await loadGroups()}catch(e){toast(e.message)}
+}
+const ANNOUNCEMENTS=URL_BASE+"/functions/v1/center-announcements";
+async function announcementsRequest(path="",opt={}){const headers={Authorization:"Bearer "+token,...(opt.headers||{})};if(!(opt.body instanceof FormData))headers["Content-Type"]="application/json";const r=await fetch(ANNOUNCEMENTS+path,{...opt,headers,cache:"no-store"});const d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error||"تعذر تنفيذ العملية");return d}
+async function loadAnnouncements(){const el=document.getElementById("announcementAdminList");if(!el)return;el.innerHTML='<div class="empty">جاري تحميل الإعلانات...</div>';try{const rows=(await announcementsRequest()).data||[];el.innerHTML=rows.length?rows.map(a=>'<div class="panel"><div class="sectionhead"><div><h3 style="margin:0">'+esc(a.title||"")+'</h3><div class="mini">'+esc(a.announcement_type||"عام")+' • '+(a.is_published?"منشور":"مخفي")+'</div></div><div><button class="btn light" onclick="editAnnouncement(\\\''+a.id+'\\\')">تعديل</button> <button class="btn danger" onclick="deleteAnnouncement(\\\''+a.id+'\\\')">حذف</button></div></div><div style="white-space:pre-line">'+esc(a.body||"")+'</div>'+(a.image_url?'<img src="'+esc(a.image_url)+'" style="display:block;max-width:700px;max-height:350px;width:100%;object-fit:cover;border-radius:12px;margin-top:10px">':'')+'</div>').join(""):'<div class="empty">لا توجد إعلانات بعد.</div>'}catch(e){el.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}}
+async function newAnnouncement(){const title=prompt("عنوان الإعلان:");if(!title?.trim())return;const body=prompt("نص الإعلان:");if(body===null)return;const type=prompt("نوع الإعلان:","عام")||"عام";const published=confirm("نشر الإعلان الآن؟");try{await announcementsRequest("",{method:"POST",body:JSON.stringify({title:title.trim(),body:body.trim(),announcement_type:type.trim(),is_published:published,published_at:new Date().toISOString()})});toast("تمت إضافة الإعلان");await loadAnnouncements()}catch(e){toast(e.message)}}
+async function editAnnouncement(id){try{const a=((await announcementsRequest()).data||[]).find(x=>x.id===id);if(!a)return;const title=prompt("عنوان الإعلان:",a.title||"");if(title===null)return;const body=prompt("نص الإعلان:",a.body||"");if(body===null)return;const type=prompt("نوع الإعلان:",a.announcement_type||"عام");if(type===null)return;const published=confirm(a.is_published?"موافق = منشور، إلغاء = مخفي":"موافق = نشر، إلغاء = إبقاء مخفي");await announcementsRequest("/"+encodeURIComponent(id),{method:"PATCH",body:JSON.stringify({title:title.trim(),body:body.trim(),announcement_type:type.trim(),is_published:published,published_at:a.published_at||new Date().toISOString()})});toast("تم تعديل الإعلان");await loadAnnouncements()}catch(e){toast(e.message)}}
+async function deleteAnnouncement(id){if(!confirm("حذف هذا الإعلان نهائيًا؟"))return;try{await announcementsRequest("/"+encodeURIComponent(id),{method:"DELETE"});toast("تم حذف الإعلان");await loadAnnouncements()}catch(e){toast(e.message)}}
+
+async function newStudent(){
+ const full_name=prompt("اسم الطالب الكامل:");if(!full_name?.trim())return;const student_code=prompt("رقم الملف (اختياري):","")||null;const phone=prompt("رقم الهاتف (اختياري):","")||null;const country=prompt("الدولة (اختياري):","")||null;
+ try{const d=await api("/student",{method:"POST",body:JSON.stringify({full_name:full_name.trim(),student_code,phone,country,selected_tracks:[]})});toast("تم إنشاء الطالب بنجاح");await loadAll();openStudent(d.data.id)}catch(e){toast(e.message)}
+}
+async function deleteStudent(){
+ if(!current||!confirm("هل أنت متأكد من حذف هذا الطالب؟"))return;const typed=prompt("اكتب حذف للتأكيد:");if(typed!=="حذف")return;
+ try{await api("/student/"+current,{method:"DELETE"});closeModal();current=null;currentData=null;toast("تم حذف الطالب");await loadAll()}catch(e){toast(e.message)}
+}
+function toast(s){const x=document.getElementById("toast");x.textContent=s;x.style.display="block";clearTimeout(window.__toast);window.__toast=setTimeout(()=>x.style.display="none",3000)}
+logout.onclick=()=>{localStorage.removeItem("center_admin_token");location.reload()};
+token=localStorage.getItem("center_admin_token")||"";if(token)start();
+</script>
+</body>
+</html>
